@@ -1,0 +1,4 @@
+#!/bin/bash
+if pgrep -x kitty; then
+  killall -SIGUSR1 kitty
+fi

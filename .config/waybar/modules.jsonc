@@ -1,0 +1,146 @@
+{  
+  "reload_style_on_change": true,
+  "layer": "top",
+  "position": "top",
+  "spacing": 0,
+  "height": 30,
+  "modules-left": ["custom/powers", "hyprland/workspaces"],
+  "modules-center": [
+    "clock",
+    "custom/update",
+    "custom/screenrecording-indicator"
+  ],
+  "modules-right": [
+    "group/tray-expander",
+    "network",
+    "custom/gpu-temperature",
+    "cpu",
+    "custom/disk",
+    "memory",
+    "pulseaudio"
+  ],
+
+  "hyprland/workspaces": {
+      "on-click": "activate",
+      "format": "{icon}",
+      "format-icons": {
+        "default": "",
+        "1": "1",
+        "2": "2",
+        "3": "3",
+        "4": "4",
+        "5": "5",
+        "6": "6",
+        "7": "",
+        "8": "",
+        "9": "9",
+        "active": "󱓻"
+      },
+      "active-only": false,
+      "persistent-only": false
+  },
+
+  "custom/powers": {
+    "format": "󰅩",
+    "on-click": "menu",
+    "tooltip-format": "Powers Menu\n\nSuper + Alt + Space"
+  },
+
+  "custom/update": {
+    "format": "",
+    "return-type": "json",
+    "escape": true,
+    "tooltip": true,
+    "exec": "~/.config/waybar/scripts/update-available.sh",
+    "interval": 3600,
+    "signal": 7,
+    "hide-empty-text": true,
+    "on-click": "uwsm-app -- kitty --hold -e ~/.config/waybar/scripts/update-system.sh"
+  },
+
+  "clock": {
+    "format": "{:%a %d %H:%M}",
+    "format-alt": "{:L%d %B W%V %Y}",
+    "tooltip": false
+  },
+
+  "network": {
+    "interval": 3,
+    "format": "{icon}",
+    "format-ethernet": "󰀂",
+    "format-disconnected": "󰤮",
+    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
+    "tooltip-format-disconnected": "Disconnected",
+    "format-alt": "{ifname}: {ipaddr}/{cidr}",
+    "spacing": 1
+  },
+
+  "custom/gpu-temperature": {
+    "exec": "nvidia-smi -q -i 0,1 -d TEMPERATURE | grep -oP 'GPU Current Temp\\s+:\\s+\\K\\d+'",
+    "format": " {}°C",
+    "return-type": "",
+    "interval": 1
+  },
+
+  "temperature": {
+    "format": " {temperatureC}°C",
+    "spacing": 1
+  },
+
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛 {usage}%",
+    "on-click": "kitty -e btop"
+  },
+
+  "custom/disk": {
+    "format": " {text}",
+    "exec": "~/.config/waybar/scripts/disk.sh",
+    "interval": "20",
+    "return-type": "json",
+    "tooltip": true
+  },
+
+  "memory": {
+    "interval": 5,
+    "format": "  {}%",
+    "states": {
+      "cool": 50,
+      "warning": 70,
+      "critical": 90
+    }
+  },
+
+  "pulseaudio": {
+    "format": "{icon} {volume}",
+    "on-click": "kitty --app-id=com.powers.Wiremix -e wiremix",
+    "on-click-right": "pamixer -t",
+    "scroll-step": 5,
+    "format-muted": "",
+    "format-icons": {
+      "default": ["", "", ""]
+    }
+  },
+  "group/tray-expander": {
+    "orientation": "inherit",
+    "drawer": {
+      "transition-duration": 600,
+      "children-class": "tray-group-item"
+    },
+    "modules": ["custom/expand-icon", "tray"]
+  },
+  "custom/expand-icon": {
+    "format": "",
+    "tooltip": false
+  },
+  "custom/screenrecording-indicator": {
+    "on-click": "cmd-screenrecord",
+    "exec": "~/.config/waybar/indicators/screen-recording.sh",
+    "signal": 8,
+    "return-type": "json"
+  },
+  "tray": {
+    "icon-size": 12,
+    "spacing": 17
+  }
+}
