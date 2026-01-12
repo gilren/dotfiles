@@ -1,9 +1,5 @@
-# If you come from bash you might have to change your $PATH.
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$HOME/.volta/bin:$BUN_INSTALL/bin:$PATH"
-
-# Path to your Oh My Zsh installation.
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$BUN_INSTALL/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
-
 export VISUAL=nvim
 export EDITOR=nvim 
 
@@ -19,7 +15,6 @@ setopt hist_expire_dups_first
 setopt hist_ignore_dups 
 setopt hist_verify 
 
-# Useful aliases 
 # Replace ls with eza alias
 alias ls='eza -a --color=always --group-directories-first --icons' # preferred listing alias
 alias la='eza -al --color=always --group-directories-first --icons' # all files and dirs alias
@@ -27,7 +22,7 @@ alias ll='eza -l --color=always --group-directories-first --icons'  # long forma
 alias lt='eza -aT --color=always --group-directories-first --icons'  # tree listing
 alias l.="eza -a | grep -e '^\.'"
 
-# # ---- Zoxide (better cd) ---- 
+# Zoxide (better cd)
 eval "$(zoxide init zsh)" alias cd="z"
 
 bindkey '^[[A' history-search-backward
@@ -48,16 +43,14 @@ function y() {
     rm -f -- "$tmp" 
 } 
 
-# # bun completions 
+# bun 
 [ -s "/home/renaud/.bun/_bun" ] && source "/home/renaud/.bun/_bun" 
-# # bun 
 export BUN_INSTALL="$HOME/.bun" 
 export PATH="$BUN_INSTALL/bin:$PATH" 
 
+# github
 eval $(keychain ~/.ssh/github 2>/dev/null)
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-
-alias wt="curl -s wttr.in/Liege | head -n 17"
 
 eval "$(starship init zsh)" 
