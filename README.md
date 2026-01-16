@@ -4,9 +4,7 @@ This is my collection of dotfiles for a customized Arch Linux desktop environmen
 
 I started with [Arch Linux](https://archlinux.org/) and got into ricing, I was running Arch for a couple of months but I wanted to try [Omarchy](https://github.com/basecamp/omarchy) for a bit.
 
-Realised pretty quickly that I didn’t like a lot of the decisions, keybinds or pre-installed apps. Rather than fighting with it by tinkering with the provided config files.
-
-I decided to go back to Arch and take only what I liked from Omarchy:
+Realised pretty quickly that I didn’t like a lot of the decisions, keybinds or pre-installed apps. Rather than fighting with it by tinkering with the provided config files, I decided to go back to Arch and take only what I liked from Omarchy:
 - Config structure
 - **[Unified clipboard](https://learn.omacom.io/2/the-omarchy-manual/105/universal-clipboard)**
 - **[Capture](https://learn.omacom.io/2/the-omarchy-manual/53/hotkeys#capture)**
