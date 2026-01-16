@@ -1,4 +1,4 @@
-export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$BUN_INSTALL/bin:$PATH"
+export PATH="$HOME/bin:$HOME/.local/bin:/usr/local/bin:$PATH"
 export ZSH="$HOME/.oh-my-zsh"
 export VISUAL=nvim
 export EDITOR=nvim 
@@ -15,25 +15,17 @@ setopt hist_expire_dups_first
 setopt hist_ignore_dups 
 setopt hist_verify 
 
+bindkey '^[[A' history-search-backward
+bindkey '^[[B' history-search-forward 
+
+eval "$(fzf --zsh)"
+
 # Replace ls with eza alias
 alias ls='eza -a --color=always --group-directories-first --icons' # preferred listing alias
 alias la='eza -al --color=always --group-directories-first --icons' # all files and dirs alias
 alias ll='eza -l --color=always --group-directories-first --icons'  # long format alias
 alias lt='eza -aT --color=always --group-directories-first --icons'  # tree listing
 alias l.="eza -a | grep -e '^\.'"
-
-# Zoxide (better cd)
-eval "$(zoxide init zsh)" alias cd="z"
-
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward 
-
-# Common use
-alias ..='cd ..'
-alias ...='cd ../..'
-alias ....='cd ../../..'
-alias .....='cd ../../../..'
-alias ......='cd ../../../../..'
 
 function y() { 
     local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" 
@@ -45,12 +37,18 @@ function y() {
 
 # bun 
 [ -s "/home/renaud/.bun/_bun" ] && source "/home/renaud/.bun/_bun" 
+
 export BUN_INSTALL="$HOME/.bun" 
 export PATH="$BUN_INSTALL/bin:$PATH" 
 
 # github
 eval $(keychain ~/.ssh/github 2>/dev/null)
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# Zoxide (better cd)
+eval "$(zoxide init zsh)"
+
+# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(starship init zsh)" 
+
+
