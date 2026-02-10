@@ -1,4 +1,20 @@
 {
   "$schema": "http://opencode.ai/config.json",
-  "theme": "system"
+  "theme": "system",
+  "autoupdate": true,
+  "permission": {
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.envrc": "deny",
+      "secrets/*": "deny"
+    },
+    "external_directory": {
+      "/home/renaud/Dev/opencode/*": "allow",
+      "/home/renaud/dotfiles/.config/opencode/*": "allow",
+      "/home/renaud/.config/opencode/*": "allow"
+    }
+    
+  }
 }

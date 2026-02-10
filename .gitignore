@@ -1,1 +1,6 @@
 .config/git/user.gitconfig
+
+.config/opencode/*
+!.config/opencode/opencode.json
+!.config/opencode/AGENTS.md
+

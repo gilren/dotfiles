@@ -42,7 +42,7 @@ export BUN_INSTALL="$HOME/.bun"
 export PATH="$BUN_INSTALL/bin:$PATH" 
 
 # github
-eval $(keychain ~/.ssh/github 2>/dev/null)
+eval "$(keychain --quiet --agents ssh --eval ~/.ssh/github)"
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
@@ -51,4 +51,5 @@ eval "$(zoxide init zsh)"
 
 eval "$(starship init zsh)" 
 
-
+. "$HOME/.turso/env"
+. "/home/renaud/.deno/env"
