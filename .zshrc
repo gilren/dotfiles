@@ -41,13 +41,11 @@ function y() {
 export BUN_INSTALL="$HOME/.bun" 
 export PATH="$BUN_INSTALL/bin:$PATH" 
 
-# github
-eval "$(keychain --quiet --agents ssh --eval ~/.ssh/github)"
+# Load keychain-managed SSH keys
+eval $(keychain --quiet ~/.ssh/github)
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
-
-# [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 eval "$(starship init zsh)" 
 
