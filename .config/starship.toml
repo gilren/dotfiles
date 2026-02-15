@@ -1,21 +1,18 @@
 add_newline = true
 command_timeout = 200
-format = "[$directory$git_branch$git_status]($style)$character"
+format = "$directory$git_branch$git_status$all"
 
 [character]
-error_symbol = "[✗](bold cyan)"
-success_symbol = "[❯](bold cyan)"
+error_symbol = "[󰘧](bold red)"
+success_symbol = "[󰘧](bold green)"
 
 [directory]
+truncate_to_repo = false
 read_only = " "
-truncation_length = 2
-truncation_symbol = "…/"
-repo_root_style = "bold cyan"
 repo_root_format = "[$repo_root]($repo_root_style)[$path]($style)[$read_only]($read_only_style) "
 
-
 [git_branch]
-symbol = " "
+symbol = " "
 style = "italic cyan"
 format = "[$branch]($style) "
 
@@ -34,3 +31,8 @@ staged     = ""
 renamed    = ""
 deleted    = ""
 
+[golang]
+symbol = " "
+
+[package]
+disabled = true

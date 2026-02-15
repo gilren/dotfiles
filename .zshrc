@@ -7,16 +7,16 @@ plugins=(git zsh-autosuggestions web-search zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
 # history setup 
-HISTFILE=$HOME/.zhistory 
-SAVEHIST=1000 
-HISTSIZE=999 
-setopt share_history 
-setopt hist_expire_dups_first 
-setopt hist_ignore_dups 
-setopt hist_verify 
+HISTFILE=$HOME/.zhistory
+SAVEHIST=1000
+HISTSIZE=999
+setopt share_history
+setopt hist_expire_dups_first
+setopt hist_ignore_dups
+setopt hist_verify
 
 bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward 
+bindkey '^[[B' history-search-forward
 
 eval "$(fzf --zsh)"
 
@@ -35,19 +35,16 @@ function y() {
     rm -f -- "$tmp" 
 } 
 
-# bun 
-[ -s "/home/renaud/.bun/_bun" ] && source "/home/renaud/.bun/_bun" 
+# bun
+[ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-export BUN_INSTALL="$HOME/.bun" 
-export PATH="$BUN_INSTALL/bin:$PATH" 
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Load keychain-managed SSH keys
-eval $(keychain --quiet ~/.ssh/github)
+eval $(keychain --quiet ~/.ssh/key)
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
 
-eval "$(starship init zsh)" 
-
-. "$HOME/.turso/env"
-. "/home/renaud/.deno/env"
+eval "$(starship init zsh)"
