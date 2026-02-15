@@ -1,14 +1,34 @@
--- Options are automatically loaded before lazy.nvim startup
--- Default options that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/options.lua
--- Add any additional options here
-
 vim.cmd("let g:netrw_liststyle = 3")
-
 
 local opt = vim.opt
 
-opt.autoindent = true               -- copy indent from current line when starting new one
-opt.termguicolors = true
-opt.backspace = "indent,eol,start"  -- allow backspace on indent, end of line or insert mode start position
-opt.clipboard:append("unnamedplus") -- use system clipboard as default register
+-- Set tabs to 2 spaces
+opt.tabstop = 2
+opt.softtabstop = 2
+opt.expandtab = true
+
+-- Enable auto indenting and set it to spaces
+opt.smartindent = true
+opt.shiftwidth = 2
+
+-- Enable smart indenting (see https://stackoverflow.com/questions/1204149/smart-wrap-in-vim)
+opt.breakindent = true
+
+opt.backspace = "indent,eol,start" -- allow backspace on indent, end of line or insert mode start position
 opt.swapfile = false
+
+-- Enable ignorecase + smartcase for better searching
+opt.ignorecase = true
+opt.smartcase = true
+
+-- Decrease updatetime to 250ms
+opt.updatetime = 250
+
+-- Enable persistent undo history
+opt.undofile = true
+
+-- Enable 24-bit color
+opt.termguicolors = true
+
+-- Enable access to System Clipboard
+opt.clipboard = "unnamed,unnamedplus" -- use system clipboard as default register

@@ -4,17 +4,19 @@ return {
     opts = {
       -- list of servers for mason to install
       ensure_installed = {
-        "ts_ls",
-        "html",
+        "biome",
         "cssls",
-        "tailwindcss",
-        "svelte",
-        "lua_ls",
-        "graphql",
         "emmet_ls",
-        "prismals",
-        "pyright",
         "eslint",
+        "html",
+        "jsonls",
+        "lua_ls",
+        "marksman",
+        "oxlint",
+        "pyright",
+        "tailwindcss",
+        "ts_ls",
+        "svelte",
       },
     },
     dependencies = {
