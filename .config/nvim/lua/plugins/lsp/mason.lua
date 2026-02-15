@@ -2,11 +2,9 @@ return {
   {
     "mason-org/mason-lspconfig.nvim",
     opts = {
-      -- list of servers for mason to install
       ensure_installed = {
         "biome",
         "cssls",
-        "emmet_ls",
         "eslint",
         "html",
         "jsonls",
@@ -39,10 +37,10 @@ return {
     "WhoIsSethDaniel/mason-tool-installer.nvim",
     opts = {
       ensure_installed = {
-        "prettier", -- prettier formatter
-        "stylua", -- lua formatter
-        "isort", -- python formatter
-        "black", -- python formatter
+        "prettier",
+        "stylua",
+        "isort",
+        "black",
         "pylint",
         "eslint_d",
       },
