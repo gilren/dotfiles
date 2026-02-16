@@ -13,11 +13,11 @@ quick_activate = []
 symbols = 1 # providers to be queried by default
 
 [providers]
-max_results = 256 
+max_results = 256
 default = [
   "desktopapplications",
   "websearch",
-] # providers to be queried by default
+]
 
 [[providers.prefixes]]
 prefix = "/"
