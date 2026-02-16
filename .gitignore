@@ -1,7 +1,10 @@
 home/.config/opencode/node_modules/
 .opencode/plans/
 .config/themes/current/
+.config/btop/themes/current.theme
 fzf-git.sh
 
 .local/bin/keymap
 .local/bin/qmk
+
+/install

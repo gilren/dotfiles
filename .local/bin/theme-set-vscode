@@ -1,7 +1,9 @@
 #!/bin/bash
 
+CURRENT_THEME_DIR="$XDG_CONFIG_HOME/themes/current"
+
 # Sync theme to VS Code, VSCodium, and Cursor
-VS_CODE_THEME="$THEMES_DIR/current/theme/vscode.json"
+VS_CODE_THEME="$CURRENT_THEME_DIR/theme/vscode.json"
 
 set_theme() {
   local editor_cmd="$1"

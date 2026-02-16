@@ -7,8 +7,6 @@ export XDG_DATA_HOME="$HOME/.local/share"
 export XDG_CACHE_HOME="$HOME/.cache"
 
 # Derived paths
-export THEMES_DIR="$XDG_CONFIG_HOME/themes"
-export THEMES_AVAILABLE_DIR="$THEMES_DIR/available/"
 export SCREENSHOT_DIR="${SCREENSHOT_DIR:-$XDG_PICTURES_DIR/Screenshots}"
 export SCREENRECORD_DIR="${SCREENRECORD_DIR:-$XDG_VIDEOS_DIR/Screencasts}"
 

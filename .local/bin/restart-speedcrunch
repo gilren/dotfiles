@@ -1,5 +1,0 @@
-#!/bin/bash
-
-if pgrep -x speedcrunch >/dev/null; then
-    restart-app speedcrunch
-fi

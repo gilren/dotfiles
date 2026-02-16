@@ -1,12 +1,13 @@
 #!/bin/bash
 
-if [[ -z $1 && $1 != "CNCLD" ]]; then
+THEMES_AVAILABLE_DIR="$XDG_CONFIG_HOME/themes/available"
+CURRENT_THEME_DIR="$XDG_CONFIG_HOME/themes/current"
+NEXT_THEME_DIR="$CURRENT_THEME_DIR/next-theme"
+
+if [[ -z $1 && $1 != "CNCLD" ]]; then    
   echo "Usage: theme-set <theme-name>"
   exit 1
 fi
-
-CURRENT_THEME_PATH="$THEMES_DIR/current/theme"
-NEXT_THEME_PATH="$THEMES_DIR/current/next-theme"
 
 THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 THEME_PATH="$THEMES_AVAILABLE_DIR/$THEME_NAME"
@@ -18,38 +19,45 @@ if [[ ! -d "$THEME_PATH" ]]; then
 fi
 
 # Setup clean next theme directory (for atomic theme config swapping)
-rm -rf "$NEXT_THEME_PATH"
-mkdir -p "$NEXT_THEME_PATH"
+rm -rf "$NEXT_THEME_DIR"
+mkdir -p "$NEXT_THEME_DIR"
 
 # Copy static configs
-cp -r "$THEME_PATH/"* "$NEXT_THEME_PATH/" 2>/dev/null
+cp -r "$THEME_PATH/"* "$NEXT_THEME_DIR/" 2>/dev/null
 
 # Generate dynamic configs
 theme-set-templates
 
 # Swap next theme in as current
-rm -rf "$CURRENT_THEME_PATH"
-mv "$NEXT_THEME_PATH" "$CURRENT_THEME_PATH"
+rm -rf "$CURRENT_THEME_DIR/theme"
+mv "$NEXT_THEME_DIR" "$CURRENT_THEME_DIR/theme"
 
 # Setup bat theme symlink and rebuild cache
 # TODO: Lets make the symlink on build one time
 mkdir -p "$XDG_CONFIG_HOME/bat/themes"
-ln -sf "$CURRENT_THEME_PATH/bat.tmTheme" "$XDG_CONFIG_HOME/bat/themes/current.tmTheme"
+ln -sf "$CURRENT_THEME_DIR/theme/bat.tmTheme" "$XDG_CONFIG_HOME/bat/themes/current.tmTheme"
 bat cache --build
 
+
 # Store theme name for reference
-echo "$THEME_NAME" > "$THEMES_DIR/current/theme.name"
+echo "$THEME_NAME" > "$CURRENT_THEME_DIR/theme.name"
 
 # Change background with theme
 theme-bg-next
 
 # Restart components to apply new theme
-if pgrep -x waybar >/dev/null; then
-  restart-waybar
+for app in waybar swayosd-server; do
+  restart-app "$app" 2>/dev/null
+done
+
+if pgrep -x speedcrunch >/dev/null; then
+    restart-app speedcrunch
 fi
-restart-swayosd
-restart-speedcrunch
-restart-terminal
+
+if pgrep -x kitty >/dev/null; then
+  killall -SIGUSR1 kitty >/dev/null
+fi
+
 hyprctl reload
 pkill -SIGUSR2 btop
 pkill -SIGUSR2 opencode
