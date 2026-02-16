@@ -1,4 +1,4 @@
 #!/bin/bash
-if pgrep -x kitty; then
-  killall -SIGUSR1 kitty
+if pgrep -x kitty >/dev/null; then
+  killall -SIGUSR1 kitty >/dev/null
 fi

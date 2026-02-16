@@ -5,20 +5,41 @@ if [[ -z $1 && $1 != "CNCLD" ]]; then
   exit 1
 fi
 
-THEMES_DIR="$HOME/.config/themes/available/"
-CURRENT_THEME_DIR="$HOME/.config/themes/current/theme"
+CURRENT_THEME_PATH="$HOME/.config/themes/current/theme"
+NEXT_THEME_PATH="$HOME/.config/themes/current/next-theme"
+THEMES_PATH="$HOME/.config/themes/available"
 
 THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-THEME_PATH="$THEMES_DIR/$THEME_NAME"
+THEME_PATH="$THEMES_PATH/$THEME_NAME"
 
 # Check if the theme entered exists
 if [[ ! -d "$THEME_PATH" ]]; then
-  echo "Theme '$THEME_NAME' does not exist in $THEMES_DIR"
+  echo "Theme '$THEME_NAME' does not exist in $THEMES_PATH"
   exit 1
 fi
 
-# Update theme symlinks
-ln -nsf "$THEME_PATH" "$CURRENT_THEME_DIR"
+# Setup clean next theme directory (for atomic theme config swapping)
+rm -rf "$NEXT_THEME_PATH"
+mkdir -p "$NEXT_THEME_PATH"
+
+# Copy static configs
+cp -r "$THEME_PATH/"* "$NEXT_THEME_PATH/" 2>/dev/null
+
+# Generate dynamic configs
+theme-set-templates
+
+# Swap next theme in as current
+rm -rf "$CURRENT_THEME_PATH"
+mv "$NEXT_THEME_PATH" "$CURRENT_THEME_PATH"
+
+# Setup bat theme symlink and rebuild cache
+# TODO: Lets make the symlink on build one time
+mkdir -p "$HOME/.config/bat/themes"
+ln -sf "$CURRENT_THEME_PATH/bat.tmTheme" "$HOME/.config/bat/themes/current.tmTheme"
+bat cache --build
+
+# Store theme name for reference
+echo "$THEME_NAME" > "$HOME/.config/themes/current/theme.name"
 
 # Change background with theme
 theme-bg-next
@@ -32,11 +53,8 @@ restart-speedcrunch
 restart-terminal
 hyprctl reload
 pkill -SIGUSR2 btop
+pkill -SIGUSR2 opencode
 makoctl reload
 
-# Change gnome, browser, vscode, cursor themes
 theme-set-gnome
-# theme-set-browser
 theme-set-vscode
-# theme-set-obsidian
-
