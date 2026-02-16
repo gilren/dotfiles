@@ -1,106 +1,48 @@
-## Style Guide
+- In all interaction and commit messages, be extremely concise and sacrifice grammar for the sake of concision.
 
-### General Principles
+## Code Quality Standards
 
-- Keep things in one function unless composable or reusable
-- Avoid `try`/`catch` where possible
-- Avoid using the `any` type
-- Prefer single word variable names where possible
-- Use Bun APIs when possible, like `Bun.file()`
-- Rely on type inference when possible; avoid explicit type annotations or interfaces unless necessary for exports or clarity
-- Prefer functional array methods (flatMap, filter, map) over for loops; use type guards on filter to maintain type inference downstream
+- Make minimal, surgical changes
+- **Never compromise type safety**: No `any`, no non-null assertion operator (`!`), no type assertions (`as Type`)
+- **Make illegal states unrepresentable**: Model domain with ADTs/discriminated unions; parse inputs at boundaries into typed structures; if state can't exist, code can't mishandle it
+- **Abstractions**: Consciously constrained, pragmatically parameterised, doggedly documented
 
-### Naming
+### **ENTROPY REMINDER**
 
-Prefer single word names for variables and functions. Only use multiple words if necessary.
+This codebase will outlive you. Every shortcut you take becomes
+someone else's burden. Every hack compounds into technical debt
+that slows the whole team down.
 
-```ts
-// Good
-const foo = 1
-function journal(dir: string) {}
+You are not just writing code. You are shaping the future of this
+project. The patterns you establish will be copied. The corners
+you cut will be cut again.
 
-// Bad
-const fooBar = 1
-function prepareJournal(dir: string) {}
-```
-
-Reduce total variable count by inlining when a value is only used once.
-
-```ts
-// Good
-const journal = await Bun.file(path.join(dir, "journal.json")).json()
-
-// Bad
-const journalPath = path.join(dir, "journal.json")
-const journal = await Bun.file(journalPath).json()
-```
-
-### Destructuring
-
-Avoid unnecessary destructuring. Use dot notation to preserve context.
-
-```ts
-// Good
-obj.a
-obj.b
-
-// Bad
-const { a, b } = obj
-```
-
-### Variables
-
-Prefer `const` over `let`. Use ternaries or early returns instead of reassignment.
-
-```ts
-// Good
-const foo = condition ? 1 : 2
-
-// Bad
-let foo
-if (condition) foo = 1
-else foo = 2
-```
-
-### Control Flow
-
-Avoid `else` statements. Prefer early returns.
-
-```ts
-// Good
-function foo() {
-  if (condition) return 1
-  return 2
-}
-
-// Bad
-function foo() {
-  if (condition) return 1
-  else return 2
-}
-```
-
-### Schema Definitions (Drizzle)
-
-Use snake_case for field names so column names don't need to be redefined as strings.
-
-```ts
-// Good
-const table = sqliteTable("session", {
-  id: text().primaryKey(),
-  project_id: text().notNull(),
-  created_at: integer().notNull(),
-})
-
-// Bad
-const table = sqliteTable("session", {
-  id: text("id").primaryKey(),
-  projectID: text("project_id").notNull(),
-  createdAt: integer("created_at").notNull(),
-})
-```
+**Fight entropy. Leave the codebase better than you found it.**
 
 ## Testing
 
-- Avoid mocks as much as possible
-- Test actual implementation, do not duplicate logic into tests
+- Write tests that verify semantically correct behavior
+- **Failing tests are acceptable** when they expose genuine bugs and test correct behavior
+
+## Git, SCM,Pull Requests, Commits
+
+- **Never** add Claude to attribution or as a contributor PRs, commits, messages, or PR descriptions
+- **gh CLI available** for GitHub operations (PRs, issues, etc.)
+
+## Plans
+
+- At the end of each plan, give me a list of unresolved questions to answer, if any. Make the questions extremely concise. Sacrifice grammar for the sake of concision.
+
+## Specialized Subagents
+
+### Oracle
+
+Invoke for: code review, architecture decisions, debugging analysis, refactor planning, second opinion.
+
+### Librarian
+
+Invoke for: understanding 3rd party libraries/packages, exploring remote repositories, discovering open source patterns.
+
+### Overseer
+
+Invoke for: task orchestration, milestone/task/subtask management, finding next ready work, recording learnings, tracking multi-session work.
