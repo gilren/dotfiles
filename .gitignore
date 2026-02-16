@@ -1,2 +1,4 @@
 home/.config/opencode/node_modules/
 .opencode/plans/
+.config/themes/current/
+fzf-git.sh
