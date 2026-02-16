@@ -2,11 +2,11 @@
 
 # Cycles through the background images available
 
-THEME_NAME=$(cat "$HOME/.config/themes/current/theme.name" 2>/dev/null)
-THEME_BACKGROUNDS_PATH="$HOME/.config/themes/current/theme/backgrounds/"
-CURRENT_BACKGROUND_LINK="$HOME/.config/themes/current/background"
+THEME_NAME=$(cat "$THEMES_DIR/current/theme.name" 2>/dev/null)
+CURRENT_BACKGROUNDS_PATH="$THEMES_DIR/current/theme/backgrounds/"
+CURRENT_BACKGROUND_LINK="$THEMES_DIR/current/background"
 
-mapfile -d '' -t BACKGROUNDS < <(find -L "$THEME_BACKGROUNDS_PATH" -type f -print0 | sort -z)
+mapfile -d '' -t BACKGROUNDS < <(find -L "$CURRENT_BACKGROUNDS_PATH" -type f -print0 | sort -z)
 TOTAL=${#BACKGROUNDS[@]}
 
 if [[ $TOTAL -eq 0 ]]; then

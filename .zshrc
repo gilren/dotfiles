@@ -1,8 +1,3 @@
-export PATH="$HOME/.local/bin:/usr/local/bin:$PATH"
-export ZSH="$HOME/.oh-my-zsh"
-export VISUAL=nvim
-export EDITOR=nvim 
-
 plugins=(git zsh-autosuggestions web-search zsh-syntax-highlighting)
 source $ZSH/oh-my-zsh.sh
 
@@ -25,10 +20,6 @@ eval "$(fzf --zsh)"
 
 # -- Use fd instead of fzf --
 
-export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"
-export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
-export FZF_ALT_C_COMMAND="fd --type=d --hidden --strip-cwd-prefix --exclude .git"
-
 # Use fd (https://github.com/sharkdp/fd) for listing path candidates.
 # - The first argument to the function ($1) is the base path to start traversal
 # - See the source code (completion.{bash,zsh}) for the details.
@@ -44,9 +35,6 @@ _fzf_compgen_dir() {
 source ~/fzf-git.sh
 
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
-
-export FZF_CTRL_T_OPTS="--preview '$show_file_or_dir_preview'"
-export FZF_ALT_C_OPTS="--preview 'eza --tree --color=always {} | head -200'"
 
 # Advanced customization of fzf options via _fzf_comprun function
 # - The first argument to the function is the name of the command.
@@ -125,9 +113,6 @@ lip() {
 
 # bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
-
-export BUN_INSTALL="$HOME/.bun"
-export PATH="$BUN_INSTALL/bin:$PATH"
 
 # Load keychain-managed SSH keys
 eval $(keychain --quiet --eval ~/.ssh/key)

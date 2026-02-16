@@ -1,11 +1,6 @@
 # Changes require a restart to take effect.
 
-# Ensure Omarchy bins are in the path
-export POWERS_PATH="$HOME/.config"
-export PATH="$POWERS_PATH/bin:$PATH"
+export PATH="$XDG_CONFIG_HOME/bin:$PATH"
 
 # Set default terminal and editor
 source ~/.config/uwsm/default
-
-# Activate mise if present on the system
-omarchy-cmd-present mise && eval "$(mise activate bash)"

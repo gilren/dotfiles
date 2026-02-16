@@ -7,7 +7,7 @@ NamePretty = "Themes"
 -- The main function elephant will call
 function GetEntries()
   local entries = {}
-  local theme_dir = os.getenv("HOME") .. "/.config/themes/available"
+  local theme_dir = os.getenv("THEMES_AVAILABLE_DIR")
 
   -- First, get all theme directories
   local find_dirs_cmd = "find -L '" .. theme_dir .. "' -mindepth 1 -maxdepth 1 -type d 2>/dev/null"

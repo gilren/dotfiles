@@ -1,7 +1,7 @@
 #!/bin/bash
 
-TEMPLATES_DIR="$HOME/.config/themes/config"
-NEXT_THEME_DIR="$HOME/.config/themes/current/next-theme"
+TEMPLATES_DIR="$XDG_CONFIG_HOME/themes/config"
+NEXT_THEME_DIR="$THEMES_DIR/current/next-theme"
 COLORS_FILE="$NEXT_THEME_DIR/colors.toml"
 
 # Convert hex color to decimal RGB (e.g., "#1e1e2e" -> "30,30,46")

@@ -5,16 +5,15 @@ if [[ -z $1 && $1 != "CNCLD" ]]; then
   exit 1
 fi
 
-CURRENT_THEME_PATH="$HOME/.config/themes/current/theme"
-NEXT_THEME_PATH="$HOME/.config/themes/current/next-theme"
-THEMES_PATH="$HOME/.config/themes/available"
+CURRENT_THEME_PATH="$THEMES_DIR/current/theme"
+NEXT_THEME_PATH="$THEMES_DIR/current/next-theme"
 
 THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
-THEME_PATH="$THEMES_PATH/$THEME_NAME"
+THEME_PATH="$THEMES_AVAILABLE_DIR/$THEME_NAME"
 
 # Check if the theme entered exists
 if [[ ! -d "$THEME_PATH" ]]; then
-  echo "Theme '$THEME_NAME' does not exist in $THEMES_PATH"
+  echo "Theme '$THEME_NAME' does not exist in $THEMES_AVAILABLE_DIR"
   exit 1
 fi
 
@@ -34,12 +33,12 @@ mv "$NEXT_THEME_PATH" "$CURRENT_THEME_PATH"
 
 # Setup bat theme symlink and rebuild cache
 # TODO: Lets make the symlink on build one time
-mkdir -p "$HOME/.config/bat/themes"
-ln -sf "$CURRENT_THEME_PATH/bat.tmTheme" "$HOME/.config/bat/themes/current.tmTheme"
+mkdir -p "$XDG_CONFIG_HOME/bat/themes"
+ln -sf "$CURRENT_THEME_PATH/bat.tmTheme" "$XDG_CONFIG_HOME/bat/themes/current.tmTheme"
 bat cache --build
 
 # Store theme name for reference
-echo "$THEME_NAME" > "$HOME/.config/themes/current/theme.name"
+echo "$THEME_NAME" > "$THEMES_DIR/current/theme.name"
 
 # Change background with theme
 theme-bg-next
