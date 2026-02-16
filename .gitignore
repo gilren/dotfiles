@@ -2,6 +2,8 @@ home/.config/opencode/node_modules/
 .opencode/plans/
 .config/themes/current/
 .config/btop/themes/current.theme
+.config/fzf/theme.sh
+.config/nvim/lazy-lock.json
 fzf-git.sh
 
 .local/bin/keymap

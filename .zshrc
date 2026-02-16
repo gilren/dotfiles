@@ -17,6 +17,7 @@ bindkey '^[[B' history-search-forward
 
 # Set up fzf key bindings and fuzzy completion
 eval "$(fzf --zsh)"
+[ -f ~/.config/fzf/theme.sh ] && source ~/.config/fzf/theme.sh
 
 # -- Use fd instead of fzf --
 
@@ -31,6 +32,7 @@ _fzf_compgen_path() {
 _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
+
 
 source ~/fzf-git.sh
 
