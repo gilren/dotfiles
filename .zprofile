@@ -11,7 +11,7 @@ export SCREENSHOT_DIR="${SCREENSHOT_DIR:-$XDG_PICTURES_DIR/Screenshots}"
 export SCREENRECORD_DIR="${SCREENRECORD_DIR:-$XDG_VIDEOS_DIR/Screencasts}"
 
 # PATH
-export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bun/bin:$PATH:$HOME/.cache/.bun/bin:$PATH:/opt/cuda/bin:$PATH"
+export PATH="$HOME/.local/bin:$PATH:/usr/local/bin:$HOME/.bun/bin:$HOME/.cache/.bun/bin:/opt/cuda/bin:$HOME/go/bin"
 
 # CUDA
 export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
@@ -19,9 +19,6 @@ export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 # Editor
 export VISUAL=nvim
 export EDITOR=nvim
-
-# Zsh
-export ZSH="$HOME/.oh-my-zsh"
 
 # FZF
 export FZF_DEFAULT_COMMAND="fd --hidden --strip-cwd-prefix --exclude .git"

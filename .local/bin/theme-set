@@ -38,6 +38,10 @@ mkdir -p "$XDG_CONFIG_HOME/bat/themes"
 ln -sf "$CURRENT_THEME_DIR/theme/bat.tmTheme" "$XDG_CONFIG_HOME/bat/themes/current.tmTheme"
 bat cache --build
 
+# Setup delta theme symlink
+mkdir -p "$XDG_CONFIG_HOME/delta"
+ln -sf "$CURRENT_THEME_DIR/theme/delta.gitconfig" "$XDG_CONFIG_HOME/delta/current.gitconfig"
+
 # Setup fzf theme symlink
 mkdir -p "$XDG_CONFIG_HOME/fzf"
 ln -sf "$CURRENT_THEME_DIR/theme/fzf.sh" "$XDG_CONFIG_HOME/fzf/theme.sh"

@@ -72,17 +72,7 @@ yt() { open "https://www.youtube.com/results?search_query=${(j:+:)@}" }
 cg() { open "https://chatgpt.com/?prompt=${(j:+:)@}" }
 gt() { open "https://github.com/search?q=${(j:+:)@}" }
 
-# Yazi
-function y() { 
-    local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" 
-    cwd yazi "$@" --cwd-file="$tmp" 
-    IFS= read -r -d '' cwd < "$tmp" 
-    [ -n "$cwd" ] && [ "$cwd" != "$PWD" ] && builtin cd -- "$cwd" 
-    rm -f -- "$tmp" 
-} 
-
 # SSH Port Forwarding Functions
-
 
 # fip (Forward IP):
 # - Usage: fip server 3000 8080
