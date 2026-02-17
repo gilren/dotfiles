@@ -1,24 +1,73 @@
 {
   "$schema": "https://opencode.ai/config.json",
-  "theme": "system",
   "autoupdate": true,
+  "mcp": {
+    "backstage": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://backstage.mcp.cfdata.org/mcp"
+    },
+    "cloudflare-docs": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://docs.mcp.cloudflare.com/mcp"
+    },
+    "context7": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.context7.com/mcp"
+    },
+    "elasticsearch": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://elasticsearch.mcp.cfdata.org/mcp"
+    },
+    "gitlab": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://gitlab.mcp.cfdata.org/mcp"
+    },
+    "grep_app": {
+      "enabled": true,
+      "type": "remote",
+      "url": "https://mcp.grep.app"
+    },
+    "jira": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://jira.mcp.cfdata.org/mcp"
+    },
+    "opensrc": {
+      "command": [
+        "npx",
+        "-y",
+        "opensrc-mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "overseer": {
+      "command": [
+        "npx",
+        "-y",
+        "@dmmulroy/overseer",
+        "mcp"
+      ],
+      "enabled": true,
+      "type": "local"
+    },
+    "townlake": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://mcp.townlake.cfdata.org/mcp"
+    },
+    "wiki": {
+      "enabled": false,
+      "type": "remote",
+      "url": "https://wiki.mcp.cfdata.org/mcp"
+    }
+  },
   "permission": {
-    "external_directory": {
-      "*": "ask",
-      "~/.config/opencode/**": "allow",
-      "~/dotfiles/**": "allow",
-      "~/Dev/**": "allow",
-      "~/.local/share/opencode/mcp-auth.json": "deny"
-    },
-    "read": {
-      "*": "allow",
-      "*.env": "deny",
-      "*.env.*": "deny",
-      "*.envrc": "deny",
-      "secrets/*": "deny",
-      ".dev.vars": "ask",
-      "~/.local/share/opencode/mcp-auth.json": "deny"
-    },
     "bash": {
       "*": "ask",
       "ast-grep *": "allow",
@@ -66,7 +115,6 @@
       "npm *": "allow",
       "pnpm *": "allow",
       "prettier *": "allow",
-
       "printf *": "allow",
       "pwd": "allow",
       "readlink *": "allow",
@@ -99,38 +147,54 @@
       "zoxide *": "allow"
     },
     "edit": "allow",
+    "external_directory": {
+      "*": "ask",
+      "~/.config/opencode/**": "allow",
+      "~/.local/share/opencode/mcp-auth.json": "deny",
+      "~/Dev/**": "allow",
+      "~/dotfiles/**": "allow"
+    },
+    "read": {
+      "*": "allow",
+      "*.env": "deny",
+      "*.env.*": "deny",
+      "*.envrc": "deny",
+      ".dev.vars": "ask",
+      "secrets/*": "deny",
+      "~/.local/share/opencode/mcp-auth.json": "deny"
+    },
     "webfetch": "ask"
   },
-  "mcp": {
-    "cloudflare-docs": {
-      "type": "remote",
-      "url": "https://docs.mcp.cloudflare.com/mcp",
-      "enabled": false
-    },
-    "elasticsearch": {
-      "type": "remote",
-      "url": "https://elasticsearch.mcp.cfdata.org/mcp",
-      "enabled": false
-    },
-    "wiki": {
-      "type": "remote",
-      "url": "https://wiki.mcp.cfdata.org/mcp",
-      "enabled": false
-    },
-    "context7": {
-      "type": "remote",
-      "url": "https://mcp.context7.com/mcp",
-      "enabled": true
-    },
-    "grep_app": {
-      "type": "remote",
-      "url": "https://mcp.grep.app",
-      "enabled": true
-    },
-    "opensrc": {
-      "type": "local",
-      "command": ["npx", "-y", "opensrc-mcp"],
-      "enabled": true
+  "provider": {
+    "ollama": {
+      "models": {
+        "glm-5:cloud": {
+          "_launch": true,
+          "name": "glm-5:cloud"
+        },
+        "llama3.2": {
+          "_launch": true,
+          "name": "llama3.2"
+        },
+        "minimax-m2.5:cloud": {
+          "_launch": true,
+          "limit": {
+            "context": 204800,
+            "output": 128000
+          },
+          "name": "minimax-m2.5:cloud"
+        },
+        "qwen3:8b": {
+          "_launch": true,
+          "name": "qwen3:8b"
+        }
+      },
+      "name": "Ollama (local)",
+      "npm": "@ai-sdk/openai-compatible",
+      "options": {
+        "baseURL": "http://127.0.0.1:11434/v1"
+      }
     }
-  }
+  },
+  "theme": "system"
 }
