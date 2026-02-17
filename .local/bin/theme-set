@@ -1,13 +1,13 @@
 #!/bin/bash
 
-THEMES_AVAILABLE_DIR="$XDG_CONFIG_HOME/themes/available"
-CURRENT_THEME_DIR="$XDG_CONFIG_HOME/themes/current"
-NEXT_THEME_DIR="$CURRENT_THEME_DIR/next-theme"
-
 if [[ -z $1 && $1 != "CNCLD" ]]; then    
   echo "Usage: theme-set <theme-name>"
   exit 1
 fi
+
+THEMES_AVAILABLE_DIR="$XDG_CONFIG_HOME/themes/available"
+CURRENT_THEME_DIR="$XDG_CONFIG_HOME/themes/current"
+NEXT_THEME_DIR="$CURRENT_THEME_DIR/next-theme"
 
 THEME_NAME=$(echo "$1" | sed -E 's/<[^>]+>//g' | tr '[:upper:]' '[:lower:]' | tr ' ' '-')
 THEME_PATH="$THEMES_AVAILABLE_DIR/$THEME_NAME"
