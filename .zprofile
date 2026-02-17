@@ -11,7 +11,10 @@ export SCREENSHOT_DIR="${SCREENSHOT_DIR:-$XDG_PICTURES_DIR/Screenshots}"
 export SCREENRECORD_DIR="${SCREENRECORD_DIR:-$XDG_VIDEOS_DIR/Screencasts}"
 
 # PATH
-export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bun/bin:$PATH"
+export PATH="$HOME/.local/bin:/usr/local/bin:$HOME/.bun/bin:$PATH:$HOME/.cache/.bun/bin:$PATH:/opt/cuda/bin:$PATH"
+
+# CUDA
+export LD_LIBRARY_PATH=/opt/cuda/lib64:$LD_LIBRARY_PATH
 
 # Editor
 export VISUAL=nvim
