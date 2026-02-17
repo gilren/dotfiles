@@ -23,18 +23,18 @@ The setup has configurations for:
 ## Shell Plugins/Setup
 
 - **[Zsh](https://github.com/zsh-users/zsh)** shell
-- **[Oh My Zsh](https://github.com/ohmyzsh/ohmyzsh)** framework with plugins:
   - **[zsh-autosuggestions](https://github.com/zsh-users/zsh-autosuggestions)**
   - **[zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting)**
-  - **[web-search](https://github.com/sinetoami/web-search)**
 - **[starship](https://github.com/starship/starship)** prompt
 
 ## CLI Tools
 
-- **[Yazi](https://github.com/sxyazi/yazi)** file manager
 - **[Btop](https://github.com/aristocratos/btop)** system monitor
 - **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** system info
 - **[LazyDocker](https://github.com/jesseduffield/lazydocker)** Docker TUI
+- **[FZF](https://github.com/junegunn/fzf)** fuzzy finder
+- **[Imv](https://github.com/eXeC64/imv)** image viewer
+- **[Diffnav](https://github.com/AndrewRadev/diffnav)** vim-based diff navigation
 
 ## Inspired by
 
