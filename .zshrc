@@ -11,8 +11,8 @@ setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
 
-bindkey '^[[A' history-search-backward
-bindkey '^[[B' history-search-forward
+bindkey "^[[A" history-search-backward
+bindkey "^[[B" history-search-forward
 
 # ---- FZF -----
 
@@ -47,23 +47,30 @@ _fzf_comprun() {
   shift
 
   case "$command" in
-    cd)           fzf --preview 'eza --tree --color=always {} | head -200' "$@" ;;
+    cd)           fzf --preview "eza --tree --color=always {} | head -200" "$@" ;;
     export|unset) fzf --preview "eval 'echo \${}'"         "$@" ;;
-    ssh)          fzf --preview 'dig {}'                   "$@" ;;
+    ssh)          fzf --preview "dig {}"                   "$@" ;;
     *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
   esac
 }
 
 
 # Replace ls with eza alias
-alias ls='eza -a --color=always --group-directories-first --icons' # preferred listing alias
-alias la='eza -al --color=always --group-directories-first --icons' # all files and dirs alias
-alias ll='eza -l --color=always --group-directories-first --icons'  # long format alias
-alias lt='eza -aT  --color=always --group-directories-first --icons'  # tree listing
+alias ls="eza -a --color=always --group-directories-first --icons" # preferred listing alias
+alias la="eza -al --color=always --group-directories-first --icons" # all files and dirs alias
+alias ll="eza -l --color=always --group-directories-first --icons"  # long format alias
+alias lt="eza -aT  --color=always --group-directories-first --icons"  # tree listing
 alias l.="eza -a | grep -e '^\.'"
 
 alias cd="z"
 alias cat="bat"
+
+open() { xdg-open "$@" &>/dev/null }
+
+gg() { open "https://www.google.com/search?q=${(j:+:)@}" }
+yt() { open "https://www.youtube.com/results?search_query=${(j:+:)@}" }
+cg() { open "https://chatgpt.com/?prompt=${(j:+:)@}" }
+gt() { open "https://github.com/search?q=${(j:+:)@}" }
 
 # Yazi
 function y() { 
