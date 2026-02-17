@@ -1,5 +1,6 @@
-plugins=(git zsh-autosuggestions web-search zsh-syntax-highlighting)
-source $ZSH/oh-my-zsh.sh
+# Zsh plugins
+source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 # history setup 
 HISTFILE=$HOME/.zhistory
