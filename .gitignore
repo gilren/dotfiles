@@ -1,12 +1,35 @@
-home/.config/opencode/node_modules/
-.opencode/plans/
 .config/themes/current/
 .config/btop/themes/current.theme
 .config/fzf/theme.sh
 .config/nvim/lazy-lock.json
-fzf-git.sh
+.zsh/plugins/
 
 .local/bin/keymap
 .local/bin/qmk
 
 /install
+.config/nvim/.undodir
+.agents/
+
+
+# pi agent runtime/state (keep settings + customization resources tracked)
+.pi/agent/*
+.pi/todos/*
+.pi.pi/todos/*
+.pi/todos/*
+
+!.pi/agent/tsconfig.json
+!.pi/agent/package.json
+!.pi/agent/cloak.json
+!.pi/agent/themes/
+!.pi/agent/themes/*.json
+!.pi/agent/extensions/
+!.pi/agent/extensions/**
+!.pi/agent/mcp.json
+!.pi/agent/APPEND_SYSTEM.md
+!.pi/agent/skills/
+!.pi/agent/skills/**
+.pi/agent/skills/ui/
+
+# pi extensions node_modules
+.pi/agent/extensions/**/node_modules/

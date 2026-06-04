@@ -7,12 +7,13 @@ return {
 			notify_on_error = false,
 			formatters_by_ft = {
 				astro = { "oxfmt", "biome", "prettierd", stop_after_first = true },
+				c = { "clang_format" },
 				go = { "goimports", "gofmt" },
-				lua = { "stylua" },
 				javascript = { "oxfmt", "biome", "prettierd", stop_after_first = true },
+				lua = { "stylua" },
+				svelte = { "oxfmt", "prettierd", stop_after_first = true },
 				typescript = { "oxfmt", "biome", "prettierd", stop_after_first = true },
 				typescriptreact = { "oxfmt", "biome", "prettierd", stop_after_first = true },
-				svelte = { "oxfmt", "prettierd", stop_after_first = true },
 			},
 			formatters = {
 				oxfmt = {

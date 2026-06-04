@@ -1,6 +1,13 @@
+export ANDROID_HOME=$HOME/Android/Sdk
+
 # Zsh plugins
 source ~/.zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source ~/.zsh/plugins/fzf-git.sh
+
+# Custon keybinds
+source ~/.zsh/key-bindings.zsh
+source ~/.zsh/aliases.zsh
 
 # history setup 
 HISTFILE=$HOME/.zhistory
@@ -10,9 +17,10 @@ setopt share_history
 setopt hist_expire_dups_first
 setopt hist_ignore_dups
 setopt hist_verify
+setopt hist_ignore_space
 
-bindkey "^[[A" history-search-backward
-bindkey "^[[B" history-search-forward
+setopt autocd
+stty stop undef
 
 # ---- FZF -----
 
@@ -34,9 +42,6 @@ _fzf_compgen_dir() {
   fd --type=d --hidden --exclude .git . "$1"
 }
 
-
-source ~/fzf-git.sh
-
 show_file_or_dir_preview="if [ -d {} ]; then eza --tree --color=always {} | head -200; else bat -n --color=always --line-range :500 {}; fi"
 
 # Advanced customization of fzf options via _fzf_comprun function
@@ -53,17 +58,6 @@ _fzf_comprun() {
     *)            fzf --preview "$show_file_or_dir_preview" "$@" ;;
   esac
 }
-
-
-# Replace ls with eza alias
-alias ls="eza -a --color=always --group-directories-first --icons" # preferred listing alias
-alias la="eza -al --color=always --group-directories-first --icons" # all files and dirs alias
-alias ll="eza -l --color=always --group-directories-first --icons"  # long format alias
-alias lt="eza -aT  --color=always --group-directories-first --icons"  # tree listing
-alias l.="eza -a | grep -e '^\.'"
-
-alias cd="z"
-alias cat="bat"
 
 open() { xdg-open "$@" &>/dev/null }
 
@@ -120,4 +114,5 @@ eval $(keychain --quiet --eval ~/.ssh/key)
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
 
+# Starship
 eval "$(starship init zsh)"

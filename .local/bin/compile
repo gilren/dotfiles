@@ -1,0 +1,22 @@
+#!/bin/bash
+
+ACTIVE=$(hyprctl activewindow -j 2>/dev/null)
+if [[ -z "$ACTIVE" ]]; then
+  notify-send "Compile" "No active window"
+  exit 1
+fi
+CLASS=$(echo "$ACTIVE" | jq -r '.class')
+if [[ "$CLASS" != "kitty" ]]; then
+  notify-send "Compile" "Active window is not kitty (currently: $CLASS)"
+  exit 1
+fi
+PID=$(hyprctl activewindow -j | jq -r '.pid')
+SHELL_PID=$(pgrep -P $PID -f "bash|zsh" | head -1)
+CWD=$(readlink /proc/$SHELL_PID/cwd)
+notify-send "$CWD"
+if [[ ! -f "$CWD/build.sh" ]]; then
+  notify-send "Compile" "No build.sh found in $CWD"
+  exit 1
+fi
+
+uwsm-app -- kitty --hold -e zsh -c "cd '$CWD' && ./build.sh"

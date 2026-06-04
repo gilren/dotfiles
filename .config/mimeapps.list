@@ -46,3 +46,6 @@ text/x-c++=nvim.desktop
 application/xml=nvim.desktop
 text/xml=nvim.desktop
 x-scheme-handler/terminal=kitty.desktop
+x-scheme-handler/postman=Postman.desktop
+x-scheme-handler/figma=figma-linux.desktop
+x-scheme-handler/expo-orbit=expo-orbit.desktop
