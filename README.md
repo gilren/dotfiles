@@ -16,9 +16,11 @@ Realised pretty quickly that I didn’t like a lot of the decisions, keybinds or
 
 The setup has configurations for:
 
-- **[Hyprland](https://github.com/hyprwm/Hyprland)** with **[Waybar](https://github.com/Alexays/Waybar)** and **[Mako](https://github.com/emersion/mako)**
-- **[Neovim](https://github.com/neovim/neovim)**, **[VSCode](https://github.com/microsoft/vscode)**
-- **[Kitty](https://github.com/kovidgoyal/kitty)**
+- **[Hyprland](https://github.com/hyprwm/Hyprland)** (with Hyprlock, Hypridle) +
+  **[Waybar](https://github.com/Alexays/Waybar)** + **[Mako](https://github.com/emersion/mako)**
+- **[Neovim](https://github.com/neovim/neovim)**, **[VSCode](https://github.com/microsoft/vscode)** (theme)
+- **[Kitty](https://github.com/kovidgoyal/kitty)**, **[Tmux](https://github.com/tmux/tmux)**
+- **[UWSM](https://github.com/Vladimir-csp/uwsm)** — systemd Wayland session manager
 
 ## Shell Plugins/Setup
 
@@ -32,9 +34,21 @@ The setup has configurations for:
 - **[Btop](https://github.com/aristocratos/btop)** system monitor
 - **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** system info
 - **[LazyDocker](https://github.com/jesseduffield/lazydocker)** Docker TUI
+- **[Lazygit](https://github.com/jesseduffield/lazygit)** + **[Delta](https://github.com/dandavison/delta)** git TUI with side-by-side diffs
 - **[FZF](https://github.com/junegunn/fzf)** fuzzy finder
 - **[Imv](https://github.com/eXeC64/imv)** image viewer
 - **[Diffnav](https://github.com/AndrewRadev/diffnav)** vim-based diff navigation
+
+## Custom Scripts
+
+A collection of personal CLI tools in `.local/bin/`:
+
+- **Screen tools** — `cmd-screenshot`, `cmd-screenrecord`, `cmd-present`
+- **Theme switcher** — `theme-list`, `theme-set`, `theme-refresh`, `theme-bg-next`, etc.
+- **Hyprland helpers** — `hyprland-window-close-all`, `hyprland-window-pop`,
+  `lock-screen`, `launch-walker`, `restart-app`
+- **Keyboard** — `keymap` (draws keyboard layouts), `qmk` (firmware flashing)
+- **Launcher** — `menu`, `launch-webapp`, `refresh-applications`
 
 ## Inspired by
 

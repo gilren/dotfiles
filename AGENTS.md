@@ -4,10 +4,16 @@ This is a dotfiles repository containing system configuration files, shell scrip
 
 ## Repository Structure
 
-- `.config/` - Application configurations (Hyprland, Kitty, Tmux, Mako, etc.)
-- `.local/bin/` - User scripts and CLI tools
-- `.config/themes/` - Theming system with template processing
-- `.config/opencode/` - OpenCode agent configuration
+- `.config/` - Application configurations (Hyprland, Waybar, Neovim, Kitty, Tmux,
+  Mako, Walker, btop, fastfetch, lazygit, lazydocker, fzf, delta, diffnav, bat,
+  starship, git, imv, elephant, uwsm, nautilus, qmk, systemd, autostart,
+  environment.d, mpv, etc.)
+- `.config/themes/` - Theming system with template processing and theme switching
+  (backgrounds, colors, icons, neovim, vscode, kitty, hyprland, mako, walker, etc.)
+- `.config/mimeapps.list` - Default application associations
+- `.local/bin/` - User scripts (bash) and CLI tools (bash, python)
+- `.pi/` - Pi coding agent configuration (sessions, skills, todos)
+- `.agents/` - Agent skills (caveman, diagnose, handoff, tdd, etc.)
 
 ## Build/Lint/Test Commands
 
@@ -17,22 +23,32 @@ This is primarily a configuration repository with shell scripts. There is no for
 
 ```bash
 # Check shell scripts with shellcheck
-shellcheck .zshrc .bashrc .local/bin/*
-shellcheck .config/opencode/tool/ast-grep.ts  # TypeScript
+shellcheck .zshrc .bashrc .zshenv
+shellcheck .local/bin/cmd-* .local/bin/compile .local/bin/hyprland-*
+shellcheck .local/bin/launch-* .local/bin/lock-screen .local/bin/menu
+shellcheck .local/bin/refresh-applications .local/bin/restart-*
+shellcheck .local/bin/theme-*
 
 # Format shell scripts
-shfmt -w .zshrc .bashrc .local/bin/*
+shfmt -w .zshrc .bashrc .zshenv
+shfmt -w .local/bin/cmd-* .local/bin/compile .local/bin/hyprland-*
+shfmt -w .local/bin/launch-* .local/bin/lock-screen .local/bin/menu
+shfmt -w .local/bin/refresh-applications .local/bin/restart-*
+shfmt -w .local/bin/theme-*
+
+# Check Python scripts (keymap, qmk)
+ruff check .local/bin/keymap .local/bin/qmk
 ```
 
 ### General Validation
 
 ```bash
 # Validate JSON/YAML configs
-yq --version && yq eval '.' .config/walker/config.toml
+yq eval '.' .config/walker/config.toml
 jq . .config/fastfetch/config.jsonc
 
 # Check for common issues
-grep -r 'TODO\|FIXME' --include='*.sh' --include='*.ts' .
+grep -r 'TODO\|FIXME' --include='*.sh' --include='*.py' --include='*.lua' .
 ```
 
 ## Code Style Guidelines
@@ -43,9 +59,10 @@ grep -r 'TODO\|FIXME' --include='*.sh' --include='*.ts' .
 - Prefer consistency with surrounding code over "best practices"
 - Add comments only when the intent is genuinely unclear
 
-### Shell Scripts (.sh, .zshrc, .bashrc)
+### Shell Scripts (.sh, .zshrc, .zshenv, .bashrc)
 
-- Use `#!/usr/bin/env bash` or `#!/usr/bin/env zsh` shebang
+- Use `#!/bin/bash` shebang (actual convention in this repo; `#!/usr/bin/env bash`
+  is also acceptable for portability)
 - Use `set -euo pipefail` for error safety
 - Quote all variable expansions: `"$VAR"` not `$VAR`
 - Use `[[ ]]` for conditionals, not `[ ]`
@@ -88,8 +105,35 @@ grep -r 'TODO\|FIXME' --include='*.sh' --include='*.ts' .
 - Failing tests are acceptable when they expose genuine bugs
 - For shell scripts: manual testing is often sufficient
 
-## Specialized Subagents
+## Skills
 
-- **Oracle**: Code review, architecture, debugging
-- **Librarian**: Understanding libraries, exploring repos
-- **Overseer**: Task management, milestone tracking
+Skills live under `.agents/skills/`. Each is a directory with a `SKILL.md` that
+provides specialized instructions for a specific task. The `pi` agent loads them
+on demand when their description matches the task.
+
+### Available Skills
+
+| Skill | Purpose |
+|-------|---------|
+| `building-native-ui` | Building Expo apps with React Native + Expo Router |
+| `caveman` | Ultra-compressed communication mode (minimal tokens) |
+| `diagnose` | Structured diagnosis loop for hard bugs / regressions |
+| `expo-cicd-workflows` | EAS workflow YAML for Expo CI/CD |
+| `expo-tailwind-setup` | Tailwind CSS v4 setup with NativeWind v5 |
+| `grill-me` | Stress-test a plan through Socratic interview |
+| `grill-with-docs` | Grill + align with domain docs (CONTEXT.md, ADRs) |
+| `handoff` | Compact conversation into a handoff document |
+| `improve-codebase-architecture` | Refactoring and architecture improvement |
+| `native-data-fetching` | Network requests, React Query, caching, offline |
+| `prototype` | Build throwaway prototypes for design exploration |
+| `tdd` | Red-green-refactor test-driven development |
+| `to-issues` | Break plans into vertical-slice issues |
+| `to-prd` | Convert conversation context into PRD |
+| `triage` | Issue triage through state machine |
+| `upgrading-expo` | Expo SDK upgrade guidance |
+| `write-a-skill` | Create new agent skills |
+
+### Todos
+
+Tracked in `.pi/todos/` (file-based). Use the `todo` tool to list, claim, update,
+and close todos.
