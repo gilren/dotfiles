@@ -19,9 +19,9 @@
     "customMessageBg": "{{ color0 }}",
     "customMessageText": "",
     "customMessageLabel": "{{ accent }}",
-    "toolPendingBg": "{{ background }}",
-    "toolSuccessBg": "#1e2e1e",
-    "toolErrorBg": "#2e1e1e",
+    "toolPendingBg": "{{ color0 }}",
+    "toolSuccessBg": "{{ mix(color2, background, 5) }}",
+    "toolErrorBg": "{{ mix(color1, background, 5) }}"
     "toolTitle": "{{ accent }}",
     "toolOutput": "",
     "mdHeading": "{{ color3 }}",

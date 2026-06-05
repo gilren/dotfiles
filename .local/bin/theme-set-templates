@@ -10,15 +10,38 @@ hex_to_rgb() {
   printf "%d,%d,%d" "0x${hex:0:2}" "0x${hex:2:2}" "0x${hex:4:2}"
 }
 
+# Mix two hex colors: fg over bg at given weight (0-100)
+# result = (bg * (100 - weight) + fg * weight) / 100
+mix_colors() {
+  local fg="$1" bg="$2" weight="$3"
+  local fg_r fg_g fg_b bg_r bg_g bg_b r g b
+
+  fg_r=$((16#${fg:1:2}))
+  fg_g=$((16#${fg:3:2}))
+  fg_b=$((16#${fg:5:2}))
+  bg_r=$((16#${bg:1:2}))
+  bg_g=$((16#${bg:3:2}))
+  bg_b=$((16#${bg:5:2}))
+
+  r=$(( (bg_r * (100 - weight) + fg_r * weight) / 100 ))
+  g=$(( (bg_g * (100 - weight) + fg_g * weight) / 100 ))
+  b=$(( (bg_b * (100 - weight) + fg_b * weight) / 100 ))
+
+  printf "#%02x%02x%02x" "$r" "$g" "$b"
+}
+
 # Only generate dynamic templates for themes with a colors.toml definition
 if [[ -f $COLORS_FILE ]]; then
   sed_script=$(mktemp)
 
+  # Collect all colors into an associative array for mix() lookups
+  declare -A colors
   while IFS='=' read -r key value; do
     key="${key//[\"\' ]/}"                # strip quotes and spaces from key
     [[ $key && $key != \#* ]] || continue # skip empty lines and comments
     value="${value#*[\"\']}"
     value="${value%%[\"\']*}" # extract value between quotes (ignores inline comments)
+    colors["$key"]="$value"
 
     printf 's|{{ %s }}|%s|g\n' "$key" "$value"            # {{ key }} -> value
     printf 's|{{ %s_strip }}|%s|g\n' "$key" "${value#\#}" # {{ key_strip }} -> value without leading #
@@ -28,9 +51,26 @@ if [[ -f $COLORS_FILE ]]; then
     fi
   done <"$COLORS_FILE" >"$sed_script"
 
+  # Scan templates for mix() expressions and resolve them
   shopt -s nullglob
+  mix_re='\{\{ *mix\(([^,]+), *([^,]+), *([0-9]+)\) *\}\}'
+  for tpl in "$TEMPLATES_DIR"/*.tpl; do
+    while IFS= read -r line; do
+      if [[ $line =~ $mix_re ]]; then
+        fg_key="${BASH_REMATCH[1]}"
+        bg_key="${BASH_REMATCH[2]}"
+        weight="${BASH_REMATCH[3]}"
+        fg_val="${colors[$fg_key]}"
+        bg_val="${colors[$bg_key]}"
+        if [[ -n $fg_val && -n $bg_val && $fg_val =~ ^# && $bg_val =~ ^# ]]; then
+          mixed=$(mix_colors "$fg_val" "$bg_val" "$weight")
+          echo "s|{{ mix($fg_key, $bg_key, $weight) }}|${mixed}|g" >> "$sed_script"
+        fi
+      fi
+    done < "$tpl"
+  done
 
-  # Process user templates first, then built-in templates (user overrides built-in)
+  # Process templates with the enriched sed script
   for tpl in "$TEMPLATES_DIR"/*.tpl; do
     filename=$(basename "$tpl" .tpl)
     output_path="$NEXT_THEME_DIR/$filename"

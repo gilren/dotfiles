@@ -23,6 +23,7 @@
 !.pi/agent/cloak.json
 !.pi/agent/themes/
 !.pi/agent/themes/*.json
+.pi/agent/themes/current.json
 !.pi/agent/extensions/
 !.pi/agent/extensions/**
 !.pi/agent/mcp.json
