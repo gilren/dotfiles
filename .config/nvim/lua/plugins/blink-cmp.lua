@@ -53,21 +53,17 @@ return {
 					},
 					snippets = {
 						score_offset = -100, -- Much lower priority
-						-- max_items = 2,    -- Limit snippet suggestions
-						-- min_keyword_length = 3, -- Don't show for single chars
-						-- transform_items = function(ctx, items)
-						-- 	print("items:", vim.inspect(items))
-						-- 	return items
-						-- end
+						max_items = 2, -- Limit snippet suggestions
+						min_keyword_length = 3, -- Don't show for single chars
 					},
 					buffer = {
 						score_offset = -150, -- Lowest priority
 						min_keyword_length = 3, -- Only show after 3 chars
 					},
 					lazydev = {
+						score_offset = 100, -- Show at higher priority than LSP
 						name = "LazyDev",
 						module = "lazydev.integrations.blink",
-						score_offset = 100, -- Show at higher priority than LSP
 					},
 				},
 			},
@@ -87,6 +83,7 @@ return {
 			},
 			completion = {
 				trigger = {
+					show_in_snippet = false,
 					show_on_trigger_character = true,
 				},
 				menu = {
@@ -95,7 +92,7 @@ return {
 					draw = {
 						columns = {
 							{ "kind_icon" },
-							{ "label",      "label_description", gap = 1 },
+							{ "label", "label_description", gap = 1 },
 							{ "source_name" },
 						},
 						components = {
@@ -110,12 +107,10 @@ return {
 										emmet_ls = "Emmet",
 									}
 
-									local name
+									local name = source_names[ctx.source_id] or ctx.source_name
 									-- print("ctx:", vim.inspect(ctx.item))
 									if ctx.item and ctx.item.client_name then
 										name = source_names[ctx.item.client_name] or ctx.item.client_name
-									else
-										name = source_names[ctx.source_id] or ctx.source_name
 									end
 
 									return "[" .. name .. "]"
