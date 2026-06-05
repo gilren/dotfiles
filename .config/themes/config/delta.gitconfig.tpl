@@ -1,13 +1,21 @@
 [delta]
     dark = true
     tabs = 2
+    # Use the dynamically generated bat theme (matches terminal colors).
+    # Theme-set builds bat.tmTheme from the same colors.toml and symlinks it
+    # to ~/.config/bat/themes/current.tmTheme.
+    syntax-theme = current
 
+    # File names are shown in the hunk header instead (diffnav handles the
+    # file tree), so omit the separate file block.
     file-style = omit
     file-decoration-style = none
 
     line-numbers = true
     line-numbers-left-format = "{nm:>4} "
     line-numbers-right-format = "│ {np:>4} "
+    # Left column: old-file line numbers, visible on terminal bg.
+    # Right column: new-file line numbers, dimmed to blend into the diff panel.
     line-numbers-left-style = "{{ color8 }}"
     line-numbers-right-style = dim "{{ background }}" 
     line-numbers-zero-style = dim "{{ color8 }}" 
@@ -18,39 +26,24 @@
     wrap-right-symbol = " "
     wrap-right-prefix-symbol = " "
 
-    plus-style = "{{ color2 }}"
-    plus-emph-style = "{{ color2 }}" "{{ color10 }}"
-    minus-style = "{{ color1 }}"
-    minus-emph-style = "{{ color1 }}" "{{ color9 }}"
+    # Full-line background tint: 10% blend gives subtle highlight for every
+    # added/removed line. The emph variant (25% + bold) highlights the
+    # actually changed characters within a line.
+    # Template syntax: {{ mix(foreground, background, weight) }} blends
+    # two hex colors at the given weight (0 = all bg, 100 = all fg).
+    plus-style = "{{ color2 }}" "{{ mix(color2, background, 10) }}"
+    plus-emph-style = bold "{{ color2 }}" "{{ mix(color2, background, 25) }}"
+    minus-style = "{{ color1 }}" "{{ mix(color1, background, 10) }}"
+    minus-emph-style = bold "{{ color1 }}" "{{ mix(color1, background, 25) }}"
 
     hunk-label = "  󰡏 "
-    hunk-header-line-number-style = "{{ color3 }}"
+    # Hunk header: line number + dimmed description in gray, file name in
+    # foreground, and a colored overline/underline using the theme accent.
+    hunk-header-line-number-style = "{{ accent }}"
     hunk-header-style = dim "{{ color8 }}"
-    hunk-header-file-style = dim "{{ color8 }}"
-    hunk-header-decoration-style = "{{ color3 }}" ol ul
+    hunk-header-file-style = "{{ foreground }}"
+    hunk-header-decoration-style = "{{ accent }}" ol ul
 
+    # Unchanged (context) lines use bat syntax highlighting via the dynamic
+    # theme. No explicit background — blends with terminal bg.
     zero-style = syntax
-
-
-    # blame-palette = "#1e1e2e #181825 #11111b #313244 #45475a"
-	# hunk-header-decoration-style = "#6c7086" box ul
-	# hunk-header-file-style = bold
-	# hunk-header-line-number-style = bold "#a6adc8"
-	# hunk-header-style = file line-number syntax
-	# line-numbers-left-style = "#6c7086"
-	# line-numbers-right-style = "#6c7086"
-	# line-numbers-zero-style = "#6c7086"
-	# # 35% red 65% base
-	# minus-emph-style = bold syntax "#694559"
-	# # 20% red 80% base
-	# minus-style = syntax "#493447"
-	# # 35% green 65% base
-	# plus-emph-style = bold syntax "#4e6356"
-	# # 20% green 80% base
-	# plus-style = syntax "#394545"
-	# map-styles = \
-	# 	bold purple => syntax "#5b4e74", \
-	# 	bold blue => syntax "#445375", \
-	# 	bold cyan => syntax "#446170", \
-	# 	bold yellow => syntax "#6b635b"
-	# # Should match the name of the bat theme
