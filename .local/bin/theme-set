@@ -46,6 +46,10 @@ ln -sf "$CURRENT_THEME_DIR/theme/delta.gitconfig" "$XDG_CONFIG_HOME/delta/curren
 mkdir -p "$XDG_CONFIG_HOME/fzf"
 ln -sf "$CURRENT_THEME_DIR/theme/fzf.sh" "$XDG_CONFIG_HOME/fzf/theme.sh"
 
+# Setup pi theme symlink
+mkdir -p "$HOME/.pi/agent/themes"
+ln -sf "$CURRENT_THEME_DIR/theme/pi.json" "$HOME/.pi/agent/themes/current.json"
+
 
 # Store theme name for reference
 echo "$THEME_NAME" > "$CURRENT_THEME_DIR/theme.name"
