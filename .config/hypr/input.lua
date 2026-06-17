@@ -1,0 +1,17 @@
+-- See https://wiki.hypr.land/Configuring/Variables/#input
+hl.config({
+  input = {
+    kb_layout = "us",
+    kb_variant = "altgr-intl",
+    kb_options = "compose:caps", -- ,grp:shifts_toggle
+
+    follow_mouse = 1,
+
+    -- Change speed of keyboard repeat.
+    repeat_rate = 40,
+    repeat_delay = 600,
+
+    -- Start with numlock on by default.
+    numlock_by_default = true,
+  },
+})

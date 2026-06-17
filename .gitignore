@@ -6,6 +6,7 @@
 
 .local/bin/keymap
 .local/bin/qmk
+.local/bin/tab-mcp
 
 /install
 .config/nvim/.undodir
@@ -34,3 +35,6 @@
 
 # pi extensions node_modules
 .pi/agent/extensions/**/node_modules/
+
+
+.pi/agent/extensions/notify-on-wait.ts
