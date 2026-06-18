@@ -53,7 +53,7 @@
   signingKey = "~/.ssh/key.pub"
 
 [include]
-    path = ~/.config/delta/current.gitconfig
+  path = ~/.config/delta/current.gitconfig
 
 [pager]
 	diff = diffnav

@@ -7,7 +7,7 @@ local im = [[^([Dd]iscord|[Ww]ebCord|[Vv]esktop|chrome-discord\.com.*)$]]
 local games = [[^(steam_app_\d+)$]]
 local gamestore = [[^([Ss]team)$]]
 local video = [[^([Mm]pv|vlc)$]]
-local settings = [[^(gnome-disks|wihotspot(-gui)?|pavucontrol|org.pulseaudio.pavucontrol|xdg-desktop-portal-gtk|nvidia-settings)$]]
+local settings = [[^(gnome-disks|xdg-desktop-portal-gtk|nvidia-settings)$]]
 local floatapps = [[(com.powers.Wiremix|org.gnome.NautilusPreviewer|com.gabm.satty|About|TUI.float)]]
 
 -- =====================
@@ -20,8 +20,8 @@ hl.layer_rule({ match = { namespace = "(selection|walker)" }, no_anim = true })
 -- =====================
 hl.window_rule({ match = { class = ".*" }, suppress_event = "maximize" })
 hl.window_rule({
-  match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
-  no_focus = true,
+	match = { class = "^$", title = "^$", xwayland = true, float = true, fullscreen = false, pin = false },
+	no_focus = true,
 })
 
 -- =====================
@@ -65,28 +65,78 @@ hl.workspace_rule({ workspace = "9", monitor = vars.m3 })
 -- =====================
 -- Workspace assignment
 -- =====================
+hl.workspace_rule({ workspace = "9", layout_opts = { orientation = "top" } })
+
+-- =====================
+-- Workspace assignment
+-- =====================
 hl.window_rule({ match = { class = "^(Code)$" }, workspace = "1" })
 hl.window_rule({ match = { tag = "gamestore*" }, workspace = "3" })
 hl.window_rule({ match = { tag = "games*" }, workspace = "4" })
 hl.window_rule({ match = { tag = "multimedia_video*" }, workspace = "6" })
-hl.window_rule({ match = { tag = "im*" }, workspace = "7" })
-hl.window_rule({ match = { class = "^([Ss]potify)$" }, workspace = "8" })
+hl.window_rule({ match = { tag = "im*" }, workspace = "7 silent" })
+hl.window_rule({ match = { class = "^([Ss]potify)$" }, workspace = "8 silent" })
 
 -- =====================
 -- Floating windows
 -- =====================
-hl.window_rule({ match = { tag = "settings*" }, float = true })
+hl.window_rule({ match = { tag = "settings*" }, float = true, center = true })
+hl.window_rule({ match = { title = "Steam Settings*" }, float = true, center = true, size = { 1300, 780 } })
 hl.window_rule({ match = { title = "^(Picture-in-Picture|SpeedCrunch)$" }, float = true })
 -- Float Firefox DevTools windows (initialTitle is empty at creation, unlike normal tabs).
 hl.window_rule({ match = { class = "firefox", title = "^$" }, float = true, size = { 1300, 780 } })
 
-hl.window_rule({ match = { title = "^(Add Folder to Workspace|Save As)$" }, float = true, center = true, size = "70% 60%" })
-hl.window_rule({ match = { initial_title = "(Open Files)" }, float = true, size = "70% 60%" })
+hl.window_rule({
+	match = { title = "^(Add Folder to Workspace|Save As)$" },
+	float = true,
+	center = true,
+	size = { "(monitor_w*0.7)", "((monitor_h-30)*0.6)" },
+})
+hl.window_rule({
+	match = { initial_title = "(Open Files)" },
+	float = true,
+	size = { "(monitor_w*0.7)", "((monitor_h-30)*0.6)" },
+})
 hl.window_rule({ match = { tag = "floating-window" }, float = true, center = true, size = { 875, 600 } })
 
 hl.window_rule({ match = { class = floatapps }, tag = "+floating-window" })
 
+local diffnav_windows = {}
+
+hl.on("window.title", function(w)
+	local id = w.address
+
+	if w.class == "kitty" and w.title == "git diff" then
+		if not w.floating then
+			diffnav_windows[id] = true
+
+			hl.dispatch(hl.dsp.window.float({
+				action = "enable",
+				window = w,
+			}))
+			hl.dispatch(hl.dsp.window.resize({
+				x = 2048,
+				y = 1152,
+				window = w,
+			}))
+			hl.dispatch(hl.dsp.window.center({
+				window = w,
+			}))
+		end
+
+		return
+	end
+
+	if diffnav_windows[id] and w.class == "kitty" then
+		diffnav_windows[id] = nil
+
+		hl.dispatch(hl.dsp.window.float({
+			action = "disable",
+		}))
+	end
+end)
+
 -- =====================
 -- Sizes
 -- =====================
-hl.window_rule({ match = { tag = "settings*" }, size = "70% 70%" })
+hl.window_rule({ match = { tag = "settings*" }, size = { "(monitor_w*0.7)", "((monitor_h-30)*0.7)" } })

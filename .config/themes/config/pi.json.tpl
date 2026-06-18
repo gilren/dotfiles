@@ -21,7 +21,7 @@
     "customMessageLabel": "{{ accent }}",
     "toolPendingBg": "{{ color0 }}",
     "toolSuccessBg": "{{ mix(color2, background, 5) }}",
-    "toolErrorBg": "{{ mix(color1, background, 5) }}"
+    "toolErrorBg": "{{ mix(color1, background, 5) }}",
     "toolTitle": "{{ accent }}",
     "toolOutput": "",
     "mdHeading": "{{ color3 }}",
