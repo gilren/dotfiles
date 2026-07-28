@@ -41,12 +41,12 @@ reloads desktop components.
 - **[Btop](https://github.com/aristocratos/btop)** system monitor
 - **[Fastfetch](https://github.com/fastfetch-cli/fastfetch)** system info
 - **[LazyDocker](https://github.com/jesseduffield/lazydocker)** Docker TUI
-- **[Lazygit](https://github.com/jesseduffield/lazygit)** + **[Delta](https://github.com/dandavison/delta)** git TUI with side-by-side diffs
+- **[Delta](https://github.com/dandavison/delta)** syntax-highlighting diff pager
 - **[Bat](https://github.com/sharkdp/bat)** syntax highlighting with current theme cache
 - **[FZF](https://github.com/junegunn/fzf)** fuzzy finder
 - **[Imv](https://github.com/eXeC64/imv)** image viewer
 - [Herdr](https://github.com/ogulcancelik/herdr) terminal multiplexer for coding agents
-- [Tuicr](https://github.com/agavra/tuicr) side-by-side terminal code review
+- [Tuicr](https://github.com/agavra/tuicr) code review TUI with Vim keybindings and GitHub/GitLab export
 
 ## Inspired by
 

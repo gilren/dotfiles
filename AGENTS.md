@@ -5,8 +5,8 @@ This is a dotfiles repository containing system configuration files, shell scrip
 ## Repository Structure
 
 - `.config/` - Application configurations (Hyprland Lua modules, Waybar, Neovim,
-  Kitty, Tmux, Mako, Walker, btop, fastfetch, lazygit, lazydocker, fzf, delta,
-  bat, starship, git, imv, mpv, Herdr, Tuicr, elephant, uwsm, nautilus, qmk,
+  Kitty, Tmux, Mako, Walker, btop, fastfetch, lazydocker, fzf, delta, bat,
+  starship, git, imv, mpv, Herdr, Tuicr, elephant, uwsm, nautilus, qmk,
   systemd, autostart, environment.d, etc.)
 - `.config/themes/` - Theming system with template processing and theme switching
   (backgrounds, colors, icons, neovim, vscode, kitty, hyprland, hyprlock, mako,
