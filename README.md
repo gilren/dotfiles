@@ -19,9 +19,8 @@ The setup has configurations for:
 - **[Hyprland](https://github.com/hyprwm/Hyprland)** (with Hyprlock, Hypridle) + **[Waybar](https://github.com/Alexays/Waybar)** + **[Mako](https://github.com/emersion/mako)** + **[SwayOSD](https://github.com/ErikReider/SwayOSD)**
 - **[Neovim](https://github.com/neovim/neovim)**, **[VSCode](https://github.com/microsoft/vscode)** (theme)
 - **[Kitty](https://github.com/kovidgoyal/kitty)**, **[Tmux](https://github.com/tmux/tmux)**
+- **[mpv](https://mpv.io/)** media player, configured for reliable Wayland/NVIDIA output
 - **[UWSM](https://github.com/Vladimir-csp/uwsm)** — systemd Wayland session manager
-- Theme templates for Bat, Delta, FZF, Hyprland, Hyprlock, Kitty, Mako, Walker,
-  Waybar, btop, SwayOSD, SpeedCrunch, VSCode, Neovim, and Pi
 
 ## Theme System
 
@@ -46,24 +45,8 @@ reloads desktop components.
 - **[Bat](https://github.com/sharkdp/bat)** syntax highlighting with current theme cache
 - **[FZF](https://github.com/junegunn/fzf)** fuzzy finder
 - **[Imv](https://github.com/eXeC64/imv)** image viewer
-- **[Diffnav](https://github.com/AndrewRadev/diffnav)** vim-based diff navigation through Delta
-
-## Custom Scripts
-
-A collection of CLI tools in `.local/bin/`:
-
-- **Screen tools** — `cmd-screenshot`, `cmd-screenrecord`, `cmd-present`
-- **Theme switcher** — `theme-list`, `theme-set`, `theme-refresh`, `theme-bg-next`, etc. (renders dynamic `.tpl` configs)
-- **Hyprland helpers** — `hyprland-window-close-all`, `hyprland-window-pop`,
-  `lock-screen`, `launch-walker`, `restart-app`
-- **Keyboard** — `keymap` (draws keyboard layouts), `qmk` (firmware flashing)
-- **Launcher** — `menu`, `launch-webapp`, `refresh-applications`
-
-## Agent Helpers
-
-Local agent skills live in `.agents/skills/`; Pi-loadable symlinks live in
-`.pi/agent/skills/`. Current local skills include debugging, TDD, triage, PRD / issue
-creation, architecture review, teaching, and handoff helpers.
+- [Herdr](https://github.com/ogulcancelik/herdr) terminal multiplexer for coding agents
+- [Tuicr](https://github.com/agavra/tuicr) side-by-side terminal code review
 
 ## Inspired by
 

@@ -7,6 +7,11 @@
 .local/bin/keymap
 .local/bin/qmk
 .local/bin/tab-mcp
+.local/bin/android
+.local/bin/git-lfs
+.local/bin/herdr
+.local/bin/odin
+.local/bin/tuicr
 
 /install
 .config/nvim/.undodir
@@ -19,9 +24,23 @@
 .pi.pi/todos/*
 .pi/todos/*
 
+# Plannotator runtime/state (keep config tracked)
+.plannotator/*
+.plannotator/config.json
+
+# herdr runtime/state
+.config/herdr/*.log
+.config/herdr/session-history.json
+.config/herdr/session.json
+.config/herdr/release-notes.json
+.config/herdr/plugins.json
+.config/herdr/plugins/
+.config/herdr/.plugins.lock
+
+.pi/agent/extensions/**/node_modules/
+
 !.pi/agent/tsconfig.json
 !.pi/agent/package.json
-!.pi/agent/cloak.json
 !.pi/agent/themes/
 !.pi/agent/themes/*.json
 .pi/agent/themes/current.json
@@ -34,7 +53,5 @@
 .pi/agent/skills/ui/
 
 # pi extensions node_modules
-.pi/agent/extensions/**/node_modules/
 
 
-.pi/agent/extensions/notify-on-wait.ts

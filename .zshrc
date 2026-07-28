@@ -9,6 +9,23 @@ source ~/.zsh/plugins/fzf-git.sh
 source ~/.zsh/key-bindings.zsh
 source ~/.zsh/aliases.zsh
 
+# Support colors in less
+# Force man/groff to emit backspace formatting so less uses LESS_TERMCAP_*.
+export GROFF_NO_SGR=1
+export LESS_TERMCAP_mb=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_md=$(tput bold; tput setaf 1)
+export LESS_TERMCAP_me=$(tput sgr0)
+export LESS_TERMCAP_se=$(tput sgr0)
+export LESS_TERMCAP_so=$(tput bold; tput setaf 3; tput setab 4)
+export LESS_TERMCAP_ue=$(tput sgr0)
+export LESS_TERMCAP_us=$(tput smul; tput bold; tput setaf 2)
+export LESS_TERMCAP_mr=$(tput rev)
+export LESS_TERMCAP_mh=$(tput dim)
+export LESS_TERMCAP_ZN=$(tput ssubm)
+export LESS_TERMCAP_ZV=$(tput rsubm)
+export LESS_TERMCAP_ZO=$(tput ssupm)
+export LESS_TERMCAP_ZW=$(tput rsupm)
+
 # history setup 
 HISTFILE=$HOME/.zhistory
 SAVEHIST=1000
@@ -59,7 +76,7 @@ _fzf_comprun() {
   esac
 }
 
-open() { xdg-open "$@" &>/dev/null }
+open() { xdg-open --new-window "$@" &>/dev/null }
 
 gg() { open "https://www.google.com/search?q=${(j:+:)@}" }
 yt() { open "https://www.youtube.com/results?search_query=${(j:+:)@}" }

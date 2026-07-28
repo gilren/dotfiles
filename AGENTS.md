@@ -6,16 +6,16 @@ This is a dotfiles repository containing system configuration files, shell scrip
 
 - `.config/` - Application configurations (Hyprland Lua modules, Waybar, Neovim,
   Kitty, Tmux, Mako, Walker, btop, fastfetch, lazygit, lazydocker, fzf, delta,
-  diffnav, bat, starship, git, imv, elephant, uwsm, nautilus, qmk, systemd,
-  autostart, environment.d, mpv, etc.)
+  bat, starship, git, imv, mpv, Herdr, Tuicr, elephant, uwsm, nautilus, qmk,
+  systemd, autostart, environment.d, etc.)
 - `.config/themes/` - Theming system with template processing and theme switching
   (backgrounds, colors, icons, neovim, vscode, kitty, hyprland, hyprlock, mako,
   walker, swayosd, speedcrunch, Pi, etc.)
   See [Theme System](#theme-system) below for details.
 - `.config/mimeapps.list` - Default application associations
 - `.local/bin/` - User scripts (bash) and CLI tools (bash, python)
-- `.pi/` - Pi coding agent configuration (sessions, skills, todos)
-- `.agents/` - Agent skills (caveman, diagnose, handoff, tdd, etc.)
+- `.pi/` - Pi coding agent configuration (sessions, themes, extensions, and installed skills)
+- `.agents/` - Source-controlled local agent skills; symlinked into `.pi/agent/skills/`
 
 ## Build/Lint/Test Commands
 
@@ -85,7 +85,7 @@ The `colors.toml` follows a standard 16-color ANSI palette:
 | `hyprland-preview-share-picker.css.tpl` | `hyprland-preview-share-picker.css` | Hyprland xdg-desktop-portal picker styling |
 | `pi.json.tpl` | `pi.json` | Pi coding agent theme |
 
-### Delta + Bat + Diffnav Integration
+### Delta + Bat Integration
 
 Delta uses bat for syntax highlighting of diff context lines (`zero-style = syntax`).
 To ensure syntax colors match the current theme:
@@ -95,9 +95,6 @@ To ensure syntax colors match the current theme:
 3. bat config uses `--theme="current"`
 4. Delta's `syntax-theme = current` tells delta to load this theme
 5. `bat cache --build` rebuilds the theme cache on every theme switch
-
-Diffnav spawns delta as a subprocess (with `exec.Command("delta", args...)`)
-which reads its config from git config (`include.path=~/.config/delta/current.gitconfig`).
 
 ### Key Files Reference
 
@@ -221,32 +218,35 @@ provides specialized instructions for a specific task. Pi-loadable local skills
 are symlinked into `.pi/agent/skills/` (for example `teach`). The `pi` agent loads
 them on demand when their description matches the task.
 
-### Available Skills
+### Local Skills
 
 | Skill | Purpose |
 |-------|---------|
-| `building-native-ui` | Building Expo apps with React Native + Expo Router |
-| `caveman` | Ultra-compressed communication mode (minimal tokens) |
-| `diagnose` | Structured diagnosis loop for hard bugs / regressions |
-| `expo-cicd-workflows` | EAS workflow YAML for Expo CI/CD |
-| `expo-tailwind-setup` | Tailwind CSS v4 setup with NativeWind v5 |
-| `grill-me` | Stress-test a plan through Socratic interview |
-| `grill-with-docs` | Grill + align with domain docs (CONTEXT.md, ADRs) |
-| `handoff` | Compact conversation into a handoff document |
-| `improve-codebase-architecture` | Refactoring and architecture improvement |
-| `native-data-fetching` | Network requests, React Query, caching, offline |
-| `prototype` | Build throwaway prototypes for design exploration |
-| `setup-matt-pocock-skills` | Configure repo context for issue/triage/domain-doc skills |
+| `ask-matt` | Route a task to the appropriate skill or flow |
+| `caveman` | Ultra-compressed communication mode |
+| `codebase-design` | Deep-module design vocabulary and principles |
+| `code-review` | Review changes against repository standards and the originating spec |
+| `diagnosing-bugs` | Structured diagnosis for bugs and regressions |
+| `domain-modeling` | Maintain domain language, context, and decisions |
+| `grilling` | Stress-test plans and decisions through a one-question-at-a-time interview |
+| `grill-me` | Shortcut for a grilling session |
+| `grill-with-docs` | Grilling with domain docs maintained as decisions emerge |
+| `handoff` | Compact a conversation for another agent |
+| `herdr` | Inspect and control Herdr sessions when explicitly requested |
+| `implement` | Implement work from a spec or tickets |
+| `improve-codebase-architecture` | Find and review deepening opportunities |
+| `prototype` | Build throwaway prototypes to answer design questions |
+| `research` | Research primary sources and save findings in the repo |
+| `resolving-merge-conflicts` | Resolve in-progress merges and rebases |
+| `setup-matt-pocock-skills` | Configure issue tracking, triage labels, and domain docs |
 | `tdd` | Red-green-refactor test-driven development |
-| `teach` | Teach a skill/concept using lessons and learning records |
-| `to-issues` | Break plans into vertical-slice issues |
-| `to-prd` | Convert conversation context into PRD |
-| `triage` | Issue triage through state machine |
-| `upgrading-expo` | Expo SDK upgrade guidance |
-| `write-a-skill` | Create new agent skills |
-| `zoom-out` | Explain broader context for unfamiliar code |
+| `teach` | Stateful teaching within a workspace |
+| `to-spec` | Synthesize discussion into a published spec |
+| `to-tickets` | Break work into dependency-aware tracer-bullet tickets |
+| `triage` | Move issues and external PRs through triage states |
+| `wayfinder` | Plan large efforts as decision-ticket maps |
+| `writing-great-skills` | Guidance for writing predictable agent skills |
 
-### Todos
-
-Tracked in `.pi/todos/` (file-based). Use the `todo` tool to list, claim, update,
-and close todos.
+`.pi/agent/skills/` also contains installed Android and Cloudflare skills with
+bundled reference documentation. Do not edit installed skill contents unless the
+task explicitly concerns maintaining them.

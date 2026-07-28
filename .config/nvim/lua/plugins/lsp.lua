@@ -26,8 +26,24 @@ return {
 			local map_lsp_keybinds = require("gilren.keymaps").map_lsp_keybinds
 			-- List your LSP servers here.
 			local servers = {
+				astro = {},
 				bashls = {},
-				biome = {},
+				biome = {
+					filetypes = {
+						"astro",
+						"css",
+						"graphql",
+						"html",
+						"javascript",
+						"javascriptreact",
+						"json",
+						"jsonc",
+						"svelte",
+						"typescript",
+						"typescriptreact",
+						"vue",
+					},
+				},
 				cssls = {},
 				eslint = {
 					autostart = false,
@@ -44,9 +60,12 @@ return {
 						"scss",
 						"less",
 						"svelte",
+						"astro",
 					},
 				},
-				html = {},
+				html = {
+					filetypes = { "html" },
+				},
 				jsonls = {},
 				lua_ls = {
 					settings = {
