@@ -18,8 +18,9 @@ The setup has configurations for:
 
 - **[Hyprland](https://github.com/hyprwm/Hyprland)** (with Hyprlock, Hypridle) + **[Waybar](https://github.com/Alexays/Waybar)** + **[Mako](https://github.com/emersion/mako)** + **[SwayOSD](https://github.com/ErikReider/SwayOSD)**
 - **[Neovim](https://github.com/neovim/neovim)**, **[VSCode](https://github.com/microsoft/vscode)** (theme)
-- **[Kitty](https://github.com/kovidgoyal/kitty)**, **[Tmux](https://github.com/tmux/tmux)**
-- **[mpv](https://mpv.io/)** media player, configured for reliable Wayland/NVIDIA output
+- **[Kitty](https://github.com/kovidgoyal/kitty)** terminal and **[Herdr](https://github.com/ogulcancelik/herdr)** terminal multiplexer for coding agents
+- **[Walker](https://github.com/abenz1267/walker)** launcher with **[Elephant](https://github.com/abenz1267/elephant)** providers
+- **[mpv](https://mpv.io/)** media player, **[Imv](https://github.com/eXeC64/imv)** image viewer, and **[Sioyek](https://sioyek.info/)** document viewer
 - **[UWSM](https://github.com/Vladimir-csp/uwsm)** — systemd Wayland session manager
 
 ## Theme System
@@ -44,9 +45,7 @@ reloads desktop components.
 - **[Delta](https://github.com/dandavison/delta)** syntax-highlighting diff pager
 - **[Bat](https://github.com/sharkdp/bat)** syntax highlighting with current theme cache
 - **[FZF](https://github.com/junegunn/fzf)** fuzzy finder
-- **[Imv](https://github.com/eXeC64/imv)** image viewer
-- [Herdr](https://github.com/ogulcancelik/herdr) terminal multiplexer for coding agents
-- [Tuicr](https://github.com/agavra/tuicr) code review TUI with Vim keybindings and GitHub/GitLab export
+- **[Tuicr](https://github.com/agavra/tuicr)** code review TUI with Vim keybindings and GitHub/GitLab export
 
 ## Inspired by
 

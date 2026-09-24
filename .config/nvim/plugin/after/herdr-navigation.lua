@@ -2,8 +2,8 @@
 --
 -- Seamless <C-h/j/k/l> navigation between Neovim splits and Herdr panes:
 -- move between Neovim splits, and at a split edge hand off to Herdr so focus
--- crosses into the neighbouring Herdr pane. Outside Herdr it falls back to
--- tmux (if available) or plain Neovim window navigation.
+-- crosses into the neighbouring Herdr pane. Outside Herdr it uses plain
+-- Neovim window navigation.
 
 local function navigate(wincmd, direction)
 	local previous_window = vim.api.nvim_get_current_win()
@@ -18,9 +18,6 @@ local function navigate(wincmd, direction)
 			herdr = "herdr"
 		end
 		vim.fn.system({ herdr, "pane", "focus", "--direction", direction, "--current" })
-	elseif vim.env.TMUX and vim.env.TMUX ~= "" then
-		local tmux_directions = { left = "Left", down = "Down", up = "Up", right = "Right" }
-		pcall(vim.cmd, "TmuxNavigate" .. tmux_directions[direction])
 	end
 end
 

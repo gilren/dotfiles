@@ -5,12 +5,12 @@ This is a dotfiles repository containing system configuration files, shell scrip
 ## Repository Structure
 
 - `.config/` - Application configurations (Hyprland Lua modules, Waybar, Neovim,
-  Kitty, Tmux, Mako, Walker, btop, fastfetch, lazydocker, fzf, delta, bat,
-  starship, git, imv, mpv, Herdr, Tuicr, elephant, uwsm, nautilus, qmk,
+  Kitty, Mako, Walker, btop, fastfetch, lazydocker, fzf, delta, bat,
+  starship, git, imv, mpv, Sioyek, Herdr, Tuicr, elephant, uwsm, nautilus, qmk,
   systemd, autostart, environment.d, etc.)
 - `.config/themes/` - Theming system with template processing and theme switching
   (backgrounds, colors, icons, neovim, vscode, kitty, hyprland, hyprlock, mako,
-  walker, swayosd, speedcrunch, Pi, etc.)
+  walker, swayosd, Pi, etc.)
   See [Theme System](#theme-system) below for details.
 - `.config/mimeapps.list` - Default application associations
 - `.local/bin/` - User scripts (bash) and CLI tools (bash, python)
@@ -37,7 +37,7 @@ Switching a theme runs `theme-set <name>` (`.local/bin/theme-set`):
 3. Swap `next-theme` → `current/theme/`
 4. Symlink generated configs for bat, delta, fzf, and Pi
 5. Rebuild `bat cache --build`
-6. Reload Hyprland, waybar, swayosd, kitty, mako, btop, opencode, speedcrunch, etc.
+6. Reload Hyprland, waybar, swayosd, kitty, mako, btop, opencode, etc.
 
 ### Template Processing (`theme-set-templates`)
 
@@ -81,7 +81,6 @@ The `colors.toml` follows a standard 16-color ANSI palette:
 | `walker.css.tpl` | `walker.css` | Application launcher styling |
 | `btop.theme.tpl` | `btop.theme` | System monitor theme |
 | `swayosd.css.tpl` | `swayosd.css` | On-screen display styling |
-| `speedcrunch.json.tpl` | `speedcrunch.json` | Calculator theme |
 | `hyprland-preview-share-picker.css.tpl` | `hyprland-preview-share-picker.css` | Hyprland xdg-desktop-portal picker styling |
 | `pi.json.tpl` | `pi.json` | Pi coding agent theme |
 
@@ -223,7 +222,6 @@ them on demand when their description matches the task.
 | Skill | Purpose |
 |-------|---------|
 | `ask-matt` | Route a task to the appropriate skill or flow |
-| `caveman` | Ultra-compressed communication mode |
 | `codebase-design` | Deep-module design vocabulary and principles |
 | `code-review` | Review changes against repository standards and the originating spec |
 | `diagnosing-bugs` | Structured diagnosis for bugs and regressions |
@@ -245,7 +243,6 @@ them on demand when their description matches the task.
 | `to-tickets` | Break work into dependency-aware tracer-bullet tickets |
 | `triage` | Move issues and external PRs through triage states |
 | `wayfinder` | Plan large efforts as decision-ticket maps |
-| `writing-great-skills` | Guidance for writing predictable agent skills |
 
 `.pi/agent/skills/` also contains installed Android and Cloudflare skills with
 bundled reference documentation. Do not edit installed skill contents unless the

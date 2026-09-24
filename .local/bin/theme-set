@@ -62,10 +62,6 @@ for app in waybar swayosd-server; do
   restart-app "$app" 2>/dev/null
 done
 
-if pgrep -x speedcrunch >/dev/null; then
-    restart-app speedcrunch
-fi
-
 if pgrep -x kitty >/dev/null; then
   killall -SIGUSR1 kitty >/dev/null
 fi

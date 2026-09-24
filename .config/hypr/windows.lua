@@ -43,7 +43,6 @@ hl.window_rule({ match = { tag = "games*" }, no_blur = true, fullscreen = true }
 -- =====================
 -- App tweaks
 -- =====================
-hl.window_rule({ match = { title = "^(SpeedCrunch)$" }, max_size = { 950, 560 } })
 hl.window_rule({ match = { class = "^(love)$" }, move = "onscreen 100%-w-10" })
 hl.window_rule({ match = { class = "^(kitty|Code)$" }, opacity = "0.75" })
 
@@ -82,7 +81,7 @@ hl.window_rule({ match = { class = "^([Ss]potify)$" }, workspace = "8 silent" })
 -- =====================
 hl.window_rule({ match = { tag = "settings*" }, float = true, center = true })
 hl.window_rule({ match = { title = "Steam Settings*" }, float = true, center = true, size = { 1300, 780 } })
-hl.window_rule({ match = { title = "^(Picture-in-Picture|SpeedCrunch)$" }, float = true })
+hl.window_rule({ match = { title = "^Picture-in-Picture$" }, float = true })
 -- Float Firefox DevTools windows (initialTitle is empty at creation, unlike normal tabs).
 hl.window_rule({ match = { class = "firefox", title = "^$" }, float = true, size = { 1300, 780 } })
 

@@ -6,7 +6,6 @@ hl.bind("SUPER + return", hl.dsp.exec_cmd(vars.terminal))
 hl.bind("SUPER + M", hl.dsp.exit())
 hl.bind("SUPER + E", hl.dsp.exec_cmd("uwsm-app -- nautilus --new-window"))
 hl.bind("SUPER + W", hl.dsp.exec_cmd("restart-app waybar"))
-hl.bind("XF86Calculator", hl.dsp.exec_cmd("speedcrunch"), { description = "Calculator" })
 
 -- hl.bind("Print", hl.dsp.exec_cmd([[grim -g "$(slurp -d)" - | wl-copy]]))
 
