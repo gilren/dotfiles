@@ -76,12 +76,22 @@ _fzf_comprun() {
   esac
 }
 
-open() { xdg-open --new-window "$@" &>/dev/null }
+open() { xdg-open "$@" &>/dev/null }
 
 gg() { open "https://www.google.com/search?q=${(j:+:)@}" }
 yt() { open "https://www.youtube.com/results?search_query=${(j:+:)@}" }
 cg() { open "https://chatgpt.com/?prompt=${(j:+:)@}" }
 gt() { open "https://github.com/search?q=${(j:+:)@}" }
+github() { open "https://github.com/gilren?tab=repositories"}
+
+aotd() { IFS=$'\t' read -r title artist url < <(
+  curl -sS https://aotd.renaudgillet.be/today |
+  jq -r '.data | [.title, .artist, .url] | @tsv'
+)
+
+printf 'Playing: %s by %s\n' "$title" "$artist"
+xdg-open "$url" >/dev/null 2>&1 &!
+}
 
 # SSH Port Forwarding Functions
 
@@ -125,11 +135,18 @@ lip() {
 # bun
 [ -s "$HOME/.bun/_bun" ] && source "$HOME/.bun/_bun"
 
-# Load keychain-managed SSH keys
-eval $(keychain --quiet --eval ~/.ssh/key)
+# Use systemd's reboot-safe SSH agent; keys load on first use via ~/.ssh/config
+export SSH_AUTH_SOCK="$XDG_RUNTIME_DIR/ssh-agent.socket"
 
 # Zoxide (better cd)
 eval "$(zoxide init zsh)"
 
 # Starship
+STARSHIP_CONFIG=${HOME}/.config/starship.toml
 eval "$(starship init zsh)"
+
+# bun completions
+[ -s "/home/renaud/.bun/_bun" ] && source "/home/renaud/.bun/_bun"
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

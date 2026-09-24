@@ -6,3 +6,6 @@ PS1='[\u@\h \W]\$ '
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 [ -f ~/.config/fzf/theme.sh ] && source ~/.config/fzf/theme.sh
+
+# Generated for envman. Do not edit.
+[ -s "$HOME/.config/envman/load.sh" ] && source "$HOME/.config/envman/load.sh"

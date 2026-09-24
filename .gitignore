@@ -12,10 +12,15 @@
 .local/bin/herdr
 .local/bin/odin
 .local/bin/tuicr
+.local/bin/webi
 
 /install
 .config/nvim/.undodir
 .agents/
+
+
+# ignore local ssh config
+.ssh/config.local
 
 
 # pi agent runtime/state (keep settings + customization resources tracked)
